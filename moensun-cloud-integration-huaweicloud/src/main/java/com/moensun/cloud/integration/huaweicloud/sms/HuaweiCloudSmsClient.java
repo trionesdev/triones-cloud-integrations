@@ -26,21 +26,20 @@ public class HuaweiCloudSmsClient {
 
     private final String appKey;
     private final String appSecret;
-    private X509TrustManager trustManager;
     private SSLSocketFactory sslSocketFactory;
-    private OkHttpClient okHttpClient;
+    private final OkHttpClient okHttpClient;
 
     public HuaweiCloudSmsClient(String appKey,String appSecret){
         this.appKey = appKey;
         this.appSecret = appSecret;
-        this.trustManager = trustManager();
+        X509TrustManager trustManager = trustManager();
         try{
-            this.sslSocketFactory = sslSocketFactory(this.trustManager);
+            this.sslSocketFactory = sslSocketFactory(trustManager);
         }catch (Exception ex){
 
         }
-        okHttpClient = new OkHttpClient.Builder()
-                .sslSocketFactory(this.sslSocketFactory,this.trustManager)
+        this.okHttpClient = new OkHttpClient.Builder()
+                .sslSocketFactory(this.sslSocketFactory, trustManager)
                 .build();
     }
 
