@@ -54,6 +54,16 @@
                 <artifactId>moensun-cloud-integration-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-aliyun</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-huaweicloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

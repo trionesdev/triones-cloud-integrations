@@ -11,7 +11,7 @@ import java.io.Serializable;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HuaweiObsConfig implements Serializable {
+public class HuaweiCloudObsConfig implements Serializable {
     private String bucket;
     private String urlPrefix;
 }

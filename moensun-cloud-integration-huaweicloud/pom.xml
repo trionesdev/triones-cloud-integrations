@@ -18,6 +18,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.moensun.cloud.integration</groupId>
             <artifactId>moensun-cloud-integration-api</artifactId>
         </dependency>

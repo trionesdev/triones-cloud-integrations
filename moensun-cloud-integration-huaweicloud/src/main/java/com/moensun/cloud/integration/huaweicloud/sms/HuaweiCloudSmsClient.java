@@ -3,6 +3,7 @@ package com.moensun.cloud.integration.huaweicloud.sms;
 import com.moensun.cloud.integration.api.sms.SmsException;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.*;
 import java.io.UnsupportedEncodingException;
@@ -36,16 +37,22 @@ public class HuaweiCloudSmsClient {
         try{
             this.sslSocketFactory = sslSocketFactory(trustManager);
         }catch (Exception ex){
-
+            log.error(ex.getMessage(),ex);
         }
         this.okHttpClient = new OkHttpClient.Builder()
-                .sslSocketFactory(this.sslSocketFactory, trustManager)
+                .sslSocketFactory(this.sslSocketFactory, trustManager).hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                })
                 .build();
     }
 
 
     public HuaweiCloudSmsResponse request(HuaweiCloudSmsRequest smsRequest){
-        String url = "https://smsapi.cn-north-4.myhuaweicloud.com:443/sms/batchSendSms/v1"; //APP接入地址(在控制台"应用管理"页面获取)+接口访问URI
+        String regionId = StringUtils.isNotBlank(smsRequest.getRegionId())?smsRequest.getRegionId():"cn-south-1";
+        String url = "https://smsapi."+regionId+".myhuaweicloud.com:443/sms/batchSendSms/v1"; //APP接入地址(在控制台"应用管理"页面获取)+接口访问URI
 
         String body = buildRequestBody(smsRequest.getSender(), smsRequest.getReceiver(), smsRequest.getTemplateId(), smsRequest.getTemplateParams(),
                 smsRequest.getStatusCallBack(), smsRequest.getSignature());
@@ -152,7 +159,8 @@ public class HuaweiCloudSmsClient {
                 return;
             }
             public X509Certificate[] getAcceptedIssuers() {
-                return null;
+                X509Certificate[] x509Certificates = new X509Certificate[0];
+                return x509Certificates;
             }
         };
     }

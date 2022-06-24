@@ -10,13 +10,13 @@ import com.obs.services.model.PutObjectRequest;
 import com.obs.services.model.PutObjectResult;
 import org.apache.commons.lang3.StringUtils;
 
-public class HuaweiObs implements OssTemplate {
+public class HuaweiCloudObs implements OssTemplate {
     private final ObsClient obsClient;
-    private final HuaweiObsConfig huaweiObsConfig;
+    private final HuaweiCloudObsConfig huaweiCloudObsConfig;
 
-    public HuaweiObs(ObsClient obsClient, HuaweiObsConfig huaweiObsConfig) {
+    public HuaweiCloudObs(ObsClient obsClient, HuaweiCloudObsConfig huaweiCloudObsConfig) {
         this.obsClient = obsClient;
-        this.huaweiObsConfig = huaweiObsConfig;
+        this.huaweiCloudObsConfig = huaweiCloudObsConfig;
     }
 
 
@@ -53,11 +53,11 @@ public class HuaweiObs implements OssTemplate {
     }
 
     private String bucketName(String bucketName) {
-        return StringUtils.isNotBlank(bucketName) ? bucketName : huaweiObsConfig.getBucket();
+        return StringUtils.isNotBlank(bucketName) ? bucketName : huaweiCloudObsConfig.getBucket();
     }
 
     private String urlPrefix(String urlPrefix) {
-        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : huaweiObsConfig.getUrlPrefix();
+        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : huaweiCloudObsConfig.getUrlPrefix();
     }
 
 }
