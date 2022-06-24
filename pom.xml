@@ -13,6 +13,7 @@
         <module>moensun-cloud-integration-api</module>
         <module>moensun-cloud-integration-aliyun</module>
         <module>moensun-cloud-integration-huaweicloud</module>
+        <module>moensun-cloud-integration-tencentcloud</module>
     </modules>
 
     <properties>
