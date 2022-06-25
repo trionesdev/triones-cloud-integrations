@@ -1,26 +1,31 @@
-package com.moensun.cloud.integration.tencentcloud.cos;
+package com.moensun.cloud.integration.googlecloud.storage;
 
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.common.io.ByteStreams;
 import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
 import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PutObjectRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-public class TencentCloudCos implements OssTemplate {
+import java.io.IOException;
 
-    private final COSClient cosClient;
-    private final TencentCloudCosConfig tencentCloudCosProperties;
+@Slf4j
+public class GoogleStorage implements OssTemplate {
 
-    public TencentCloudCos(COSClient cosClient, TencentCloudCosConfig tencentCloudCosProperties) {
-        this.cosClient = cosClient;
-        this.tencentCloudCosProperties = tencentCloudCosProperties;
+    private final Storage storage;
+    private final GoogleStorageConfig googleStorageProperties;
+
+
+    public GoogleStorage(Storage storage, GoogleStorageConfig googleStorageProperties) {
+        this.storage = storage;
+        this.googleStorageProperties = googleStorageProperties;
     }
-
 
     @Override
     public OssGetObjectResponse getObject(OssGetObjectRequest request) {
@@ -29,14 +34,16 @@ public class TencentCloudCos implements OssTemplate {
 
     @Override
     public OssPutObjectResponse putObject(OssPutObjectRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        String urlPrefix = urlPrefix(request.getUrlPrefix());
+        BlobId blobId = BlobId.of(bucketName, request.getObjectName());
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
         try {
-            String bucketName = bucketName(request.getBucketName());
-            String urlPrefix = urlPrefix(request.getUrlPrefix());
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, request.getObjectName(), request.getInputStream(), new ObjectMetadata());
-            cosClient.putObject(putObjectRequest);
+            storage.create(blobInfo, ByteStreams.toByteArray(request.getInputStream()));
             return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
-        } catch (Exception ex) {
-            throw new OssException(ex);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+            throw new OssException();
         }
     }
 
@@ -44,6 +51,7 @@ public class TencentCloudCos implements OssTemplate {
     public void removeObjects(OssRemoveObjectsRequest request) {
 
     }
+
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
@@ -56,10 +64,10 @@ public class TencentCloudCos implements OssTemplate {
     }
 
     private String bucketName(String bucketName) {
-        return StringUtils.isNotBlank(bucketName) ? bucketName : tencentCloudCosProperties.getBucket();
+        return StringUtils.isNotBlank(bucketName) ? bucketName : googleStorageProperties.getBucket();
     }
 
     private String urlPrefix(String urlPrefix) {
-        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : tencentCloudCosProperties.getUrlPrefix();
+        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : googleStorageProperties.getUrlPrefix();
     }
 }

@@ -1,12 +1,10 @@
 package com.moensun.cloud.integration.tencentcloud.ocr;
 
 
+import com.moensun.cloud.integration.api.ocr.OcrException;
 import com.moensun.cloud.integration.api.ocr.OcrTemplate;
+import com.moensun.cloud.integration.api.ocr.request.OcrRequest;
 import com.moensun.cloud.integration.api.ocr.response.BusinessLicenseOCRResponse;
-import com.moensun.cloud.integration.product.ocr.OcrException;
-import com.moensun.cloud.integration.product.ocr.OcrTemplate;
-import com.moensun.cloud.integration.product.ocr.request.OcrRequest;
-import com.moensun.cloud.integration.product.ocr.response.BusinessLicenseOCRResponse;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.tencentcloudapi.ocr.v20181119.models.BizLicenseOCRRequest;

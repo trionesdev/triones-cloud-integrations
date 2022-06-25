@@ -1,9 +1,9 @@
 package com.moensun.cloud.integration.tencentcloud.sms;
 
-import com.moensun.cloud.integration.product.sms.SmsException;
-import com.moensun.cloud.integration.product.sms.SmsParam;
-import com.moensun.cloud.integration.product.sms.SmsTemplate;
-import com.moensun.cloud.integration.product.sms.request.SmsSendRequest;
+import com.moensun.cloud.integration.api.sms.SmsException;
+import com.moensun.cloud.integration.api.sms.SmsParam;
+import com.moensun.cloud.integration.api.sms.SmsTemplate;
+import com.moensun.cloud.integration.api.sms.request.SmsSendRequest;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;

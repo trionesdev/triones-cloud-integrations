@@ -14,6 +14,9 @@
         <module>moensun-cloud-integration-aliyun</module>
         <module>moensun-cloud-integration-huaweicloud</module>
         <module>moensun-cloud-integration-tencentcloud</module>
+        <module>moensun-cloud-integration-qiniu</module>
+        <module>moensun-cloud-integration-googlecloud</module>
+        <module>moensun-cloud-integration-other</module>
     </modules>
 
     <properties>
@@ -50,6 +53,7 @@
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
+
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
                 <artifactId>moensun-cloud-integration-api</artifactId>
@@ -65,6 +69,27 @@
                 <artifactId>moensun-cloud-integration-huaweicloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-tencentcloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-qiniu</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-googlecloud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.moensun.cloud.integration</groupId>
+                <artifactId>moensun-cloud-integration-other</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

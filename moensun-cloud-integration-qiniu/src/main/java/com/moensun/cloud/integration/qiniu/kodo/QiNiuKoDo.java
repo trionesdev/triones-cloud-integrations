@@ -1,4 +1,4 @@
-package com.moensun.cloud.integration.tencentcloud.cos;
+package com.moensun.cloud.integration.qiniu.kodo;
 
 import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
@@ -6,21 +6,25 @@ import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PutObjectRequest;
+import com.qiniu.common.QiniuException;
+import com.qiniu.http.Response;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.util.Auth;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-public class TencentCloudCos implements OssTemplate {
+@Slf4j
+public class QiNiuKoDo implements OssTemplate {
 
-    private final COSClient cosClient;
-    private final TencentCloudCosConfig tencentCloudCosProperties;
+    private final Auth auth;
+    private final QiNiuKoDoConfig qiNiuKoDoProperties;
+    private final UploadManager uploadManager;
 
-    public TencentCloudCos(COSClient cosClient, TencentCloudCosConfig tencentCloudCosProperties) {
-        this.cosClient = cosClient;
-        this.tencentCloudCosProperties = tencentCloudCosProperties;
+    public QiNiuKoDo(Auth auth, UploadManager uploadManager, QiNiuKoDoConfig qiNiuKoDoProperties) {
+        this.auth = auth;
+        this.qiNiuKoDoProperties = qiNiuKoDoProperties;
+        this.uploadManager = uploadManager;
     }
-
 
     @Override
     public OssGetObjectResponse getObject(OssGetObjectRequest request) {
@@ -29,14 +33,14 @@ public class TencentCloudCos implements OssTemplate {
 
     @Override
     public OssPutObjectResponse putObject(OssPutObjectRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        String urlPrefix = urlPrefix(request.getUrlPrefix());
+        String upToken = auth.uploadToken(bucketName);
         try {
-            String bucketName = bucketName(request.getBucketName());
-            String urlPrefix = urlPrefix(request.getUrlPrefix());
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, request.getObjectName(), request.getInputStream(), new ObjectMetadata());
-            cosClient.putObject(putObjectRequest);
+            Response response = uploadManager.put(request.getInputStream(), request.getObjectName(), upToken, null, null);
             return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
-        } catch (Exception ex) {
-            throw new OssException(ex);
+        } catch (QiniuException e) {
+            throw new OssException(e);
         }
     }
 
@@ -56,10 +60,10 @@ public class TencentCloudCos implements OssTemplate {
     }
 
     private String bucketName(String bucketName) {
-        return StringUtils.isNotBlank(bucketName) ? bucketName : tencentCloudCosProperties.getBucket();
+        return StringUtils.isNotBlank(bucketName) ? bucketName : qiNiuKoDoProperties.getBucket();
     }
 
     private String urlPrefix(String urlPrefix) {
-        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : tencentCloudCosProperties.getUrlPrefix();
+        return StringUtils.isNotBlank(urlPrefix) ? urlPrefix : qiNiuKoDoProperties.getUrlPrefix();
     }
 }
