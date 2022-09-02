@@ -3,7 +3,11 @@ package com.moensun.cloud.integration.minio;
 
 import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
-import com.moensun.cloud.integration.api.oss.request.*;
+import com.moensun.cloud.integration.api.oss.request.OssGetObjectNameRequest;
+import com.moensun.cloud.integration.api.oss.request.OssGetObjectRequest;
+import com.moensun.cloud.integration.api.oss.request.OssGetObjectUrlRequest;
+import com.moensun.cloud.integration.api.oss.request.OssPutObjectRequest;
+import com.moensun.cloud.integration.api.oss.request.OssRemoveObjectsRequest;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
@@ -11,10 +15,17 @@ import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
+import io.minio.RemoveObjectsArgs;
+import io.minio.Result;
+import io.minio.messages.DeleteError;
+import io.minio.messages.DeleteObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class Minio implements OssTemplate {
@@ -64,7 +75,31 @@ public class Minio implements OssTemplate {
 
     @Override
     public void removeObjects(OssRemoveObjectsRequest request) {
+        if (CollectionUtils.isEmpty(request.getObjectNames())) {
+            return;
+        }
 
+        String bucketName = bucketName(request.getBucketName());
+        List<DeleteObject> deleteObjects = request.getObjectNames()
+                .stream()
+                .map(i -> new DeleteObject(i))
+                .collect(Collectors.toList());
+
+        RemoveObjectsArgs args = RemoveObjectsArgs.builder()
+                .bucket(bucketName)
+                .objects(deleteObjects)
+                .build();
+
+        try {
+            Iterable<Result<DeleteError>> results = minioClient.removeObjects(args);
+            for (Result<DeleteError> result : results) {
+                DeleteError error = result.get();
+                log.error("Error in deleting object " + error.objectName() + "; " + error.message());
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new OssException(e);
+        }
     }
 
     @Override
