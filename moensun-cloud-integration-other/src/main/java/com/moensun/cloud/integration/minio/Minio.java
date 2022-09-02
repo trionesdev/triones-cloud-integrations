@@ -82,7 +82,7 @@ public class Minio implements OssTemplate {
         String bucketName = bucketName(request.getBucketName());
         List<DeleteObject> deleteObjects = request.getObjectNames()
                 .stream()
-                .map(i -> new DeleteObject(i))
+                .map(DeleteObject::new)
                 .collect(Collectors.toList());
 
         RemoveObjectsArgs args = RemoveObjectsArgs.builder()
