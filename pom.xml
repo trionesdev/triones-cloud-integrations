@@ -104,11 +104,11 @@
                 </repository>-->
         <snapshotRepository>
             <id>moensun</id>
-            <url>http://nexus.moensun.com/repository/maven-snapshots/</url>
+            <url>https://nexus.moensun.com/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>moensun</id>
-            <url>http://nexus.moensun.com/repository/maven-releases/</url>
+            <url>https://nexus.moensun.com/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
 
@@ -146,7 +146,7 @@
     <repositories>
         <repository>
             <id>ms-repository</id>
-            <url>http://nexus.moensun.com/repository/maven-public/</url>
+            <url>https://nexus.moensun.com/repository/maven-public/</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -161,7 +161,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>ms-repository</id>
-            <url>http://nexus.moensun.com/repository/maven-public/</url>
+            <url>https://nexus.moensun.com/repository/maven-public/</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
