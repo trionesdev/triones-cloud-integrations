@@ -1,15 +1,23 @@
 package com.moensun.cloud.integration.aliyun.oss;
 
 import com.aliyun.oss.OSS;
+import com.aliyun.oss.model.ListObjectsV2Request;
+import com.aliyun.oss.model.ListObjectsV2Result;
 import com.aliyun.oss.model.PutObjectResult;
 import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
 import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
+import com.moensun.cloud.integration.api.oss.response.OssListObjectsResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class AliYunOSS implements OssTemplate {
@@ -47,12 +55,31 @@ public class AliYunOSS implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(),urlPrefix(request.getUrlPrefix()));
+        return FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectUrl(),urlPrefix(request.getUrlPrefix()));
+        return FilePathUtils.joinPrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+    }
+
+    @Override
+    public OssListObjectsResponse listObjects(OssListObjectsRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        ListObjectsV2Request listObjectsV2Request = new ListObjectsV2Request(bucketName);
+        listObjectsV2Request.setPrefix(request.getPrefix());
+        listObjectsV2Request.setStartAfter(request.getStartAfter());
+        listObjectsV2Request.setMaxKeys(request.getMaxKeys());
+        listObjectsV2Request.setDelimiter(request.getDelimiter());
+        ListObjectsV2Result result = oss.listObjectsV2(listObjectsV2Request);
+        List<OssListObjectsResponse.ObjectSummary> objectSummaries = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(result.getObjectSummaries())) {
+            objectSummaries = result.getObjectSummaries().stream().map(t -> OssListObjectsResponse.ObjectSummary.builder()
+                    .bucketName(t.getBucketName()).key(t.getKey()).eTag(t.getETag()).size(t.getSize())
+                    .lastModified(t.getLastModified().toInstant()).storageClass(t.getStorageClass()).type(t.getType())
+                    .build()).collect(Collectors.toList());
+        }
+        return OssListObjectsResponse.builder().objectSummaries(objectSummaries).build();
     }
 
     private String bucketName(String bucketName) {

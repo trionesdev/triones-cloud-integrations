@@ -8,6 +8,7 @@ import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
 import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
+import com.moensun.cloud.integration.api.oss.response.OssListObjectsResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +62,11 @@ public class GoogleStorage implements OssTemplate {
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
         return FilePathUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+    }
+
+    @Override
+    public OssListObjectsResponse listObjects(OssListObjectsRequest request) {
+        return null;
     }
 
     private String bucketName(String bucketName) {

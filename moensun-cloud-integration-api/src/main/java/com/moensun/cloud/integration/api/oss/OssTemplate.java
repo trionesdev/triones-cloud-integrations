@@ -2,6 +2,7 @@ package com.moensun.cloud.integration.api.oss;
 
 import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
+import com.moensun.cloud.integration.api.oss.response.OssListObjectsResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 
 public interface OssTemplate {
@@ -15,4 +16,6 @@ public interface OssTemplate {
     String getObjectUrl(OssGetObjectUrlRequest request);
 
     String getObjectName(OssGetObjectNameRequest request);
+
+    OssListObjectsResponse listObjects(OssListObjectsRequest request);
 }

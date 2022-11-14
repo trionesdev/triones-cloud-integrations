@@ -3,27 +3,21 @@ package com.moensun.cloud.integration.minio;
 
 import com.moensun.cloud.integration.api.oss.OssException;
 import com.moensun.cloud.integration.api.oss.OssTemplate;
-import com.moensun.cloud.integration.api.oss.request.OssGetObjectNameRequest;
-import com.moensun.cloud.integration.api.oss.request.OssGetObjectRequest;
-import com.moensun.cloud.integration.api.oss.request.OssGetObjectUrlRequest;
-import com.moensun.cloud.integration.api.oss.request.OssPutObjectRequest;
-import com.moensun.cloud.integration.api.oss.request.OssRemoveObjectsRequest;
+import com.moensun.cloud.integration.api.oss.request.*;
 import com.moensun.cloud.integration.api.oss.response.OssGetObjectResponse;
+import com.moensun.cloud.integration.api.oss.response.OssListObjectsResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
-import io.minio.GetObjectArgs;
-import io.minio.MinioClient;
-import io.minio.ObjectWriteResponse;
-import io.minio.PutObjectArgs;
-import io.minio.RemoveObjectsArgs;
-import io.minio.Result;
+import io.minio.*;
 import io.minio.messages.DeleteError;
 import io.minio.messages.DeleteObject;
+import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,6 +104,32 @@ public class Minio implements OssTemplate {
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
         return FilePathUtils.removePrefix(request.getObjectUrl(), minioUrlPrefix(request.getUrlPrefix(), request.getBucketName()));
+    }
+
+    @Override
+    public OssListObjectsResponse listObjects(OssListObjectsRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        ListObjectsArgs args = ListObjectsArgs.builder()
+                .bucket(bucketName)
+                .startAfter(request.getStartAfter())
+                .prefix(request.getPrefix())
+                .maxKeys(request.getMaxKeys())
+                .build();
+        Iterable<Result<Item>> results = minioClient.listObjects(args);
+        List<OssListObjectsResponse.ObjectSummary> objectSummaries = new ArrayList<>();
+        results.forEach(t -> {
+            try {
+                Item item = t.get();
+                OssListObjectsResponse.ObjectSummary objectSummary = OssListObjectsResponse.ObjectSummary.builder()
+                        .bucketName(item.objectName()).eTag(item.etag()).size(item.size())
+                        .lastModified(item.lastModified().toInstant()).storageClass(item.storageClass())
+                        .build();
+                objectSummaries.add(objectSummary);
+            } catch (Exception ex) {
+                throw new OssException(ex);
+            }
+        });
+        return OssListObjectsResponse.builder().objectSummaries(objectSummaries).build();
     }
 
     private String bucketName(String bucketName) {
