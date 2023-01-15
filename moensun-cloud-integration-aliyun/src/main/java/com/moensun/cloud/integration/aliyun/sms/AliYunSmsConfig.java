@@ -15,6 +15,7 @@ import java.util.Map;
 public class AliYunSmsConfig implements Serializable {
     private static final long serialVersionUID = 8551713446967178352L;
     private String regionId;
+    private String endpoint = "dysmsapi.aliyuncs.com";
     private String signName;
     private Map<String,String> templateCodes;
 }

@@ -1,9 +1,9 @@
 package com.moensun.cloud.integration.aliyun.sms;
 
-import com.aliyuncs.CommonRequest;
-import com.aliyuncs.CommonResponse;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.http.MethodType;
+
+import com.aliyun.dysmsapi20170525.Client;
+import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.google.gson.Gson;
 import com.moensun.cloud.integration.api.sms.SmsException;
 import com.moensun.cloud.integration.api.sms.SmsTemplate;
@@ -14,15 +14,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class AliYunSms implements SmsTemplate {
 
     private final AliYunSmsConfig aliYunSmsProperties;
 
-    private final IAcsClient client;
+    private final Client client;
 
-    public AliYunSms(IAcsClient client, AliYunSmsConfig aliYunSmsProperties) {
+    public AliYunSms(Client client, AliYunSmsConfig aliYunSmsProperties) {
         this.client = client;
         this.aliYunSmsProperties = aliYunSmsProperties;
     }
@@ -35,28 +36,28 @@ public class AliYunSms implements SmsTemplate {
     @Override
     public void send(SmsSendRequest sendRequest) {
         String signName = StringUtils.isNotBlank(sendRequest.getSignName()) ? sendRequest.getSignName() : aliYunSmsProperties.getSignName();
-        CommonRequest request = new CommonRequest();
-        request.setSysMethod(MethodType.POST);
-        request.setSysDomain("dysmsapi.aliyuncs.com");
-        request.setSysVersion("2017-05-25");
-        request.setSysAction("SendSms");
-        request.putQueryParameter("RegionId", aliYunSmsProperties.getRegionId());
-        request.putQueryParameter("PhoneNumbers", sendRequest.getPhoneNumbers());
-        request.putQueryParameter("SignName", signName);
+
+        SendSmsRequest sendSmsRequest = new SendSmsRequest()
+                .setPhoneNumbers(sendRequest.getPhoneNumbers())
+                .setSignName(signName);
         if (StringUtils.isNoneBlank(sendRequest.getTemplateCode())) {
-            request.putQueryParameter("TemplateCode", sendRequest.getTemplateCode());
+            sendSmsRequest.setTemplateCode(sendRequest.getTemplateCode());
         }
         if (CollectionUtils.isNotEmpty(sendRequest.getParams())) {
             Map<String, String> paramsMap = new HashMap<>();
             sendRequest.getParams().forEach(smsParam -> paramsMap.put(smsParam.getKey(), smsParam.getValue()));
-            request.putQueryParameter("TemplateParam", new Gson().toJson(paramsMap));
+            sendSmsRequest.setTemplateParam(new Gson().toJson(paramsMap));
         }
         try {
-            CommonResponse response = client.getCommonResponse(request);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            throw new SmsException(e);
+            SendSmsResponse sendResponse = client.sendSms(sendSmsRequest);
+            if (!Objects.equals("OK", sendResponse.getBody().getCode())) {
+                throw new SmsException(sendResponse.getBody().getMessage());
+            }
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+            throw new SmsException(ex);
         }
+
     }
 
 
