@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.537</version>
+            <version>3.1.678</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.squareup.okhttp</groupId>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
-            <version>5.6.89</version>
+            <version>5.6.129</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
