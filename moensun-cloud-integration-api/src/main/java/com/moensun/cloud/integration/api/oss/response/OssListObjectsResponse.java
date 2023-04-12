@@ -23,6 +23,7 @@ public class OssListObjectsResponse {
     @NoArgsConstructor
     public static class ObjectSummary {
         private String bucketName;
+        private String objectName;
         private String key;
         private String eTag;
         private long size;

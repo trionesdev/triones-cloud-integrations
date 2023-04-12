@@ -9,6 +9,7 @@ import com.moensun.cloud.integration.api.oss.response.OssListObjectsResponse;
 import com.moensun.cloud.integration.api.oss.response.OssPutObjectResponse;
 import com.moensun.commons.core.util.FilePathUtils;
 import io.minio.*;
+import io.minio.errors.*;
 import io.minio.messages.DeleteError;
 import io.minio.messages.DeleteObject;
 import io.minio.messages.Item;
@@ -16,9 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.time.chrono.ChronoZonedDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -117,18 +124,28 @@ public class Minio implements OssTemplate {
                 .build();
         Iterable<Result<Item>> results = minioClient.listObjects(args);
         List<OssListObjectsResponse.ObjectSummary> objectSummaries = new ArrayList<>();
-        results.forEach(t -> {
+        Iterator<Result<Item>> resultIterator = results.iterator();
+        while (resultIterator.hasNext()) {
+            Result<Item> resultItem = resultIterator.next();
             try {
-                Item item = t.get();
-                OssListObjectsResponse.ObjectSummary objectSummary = OssListObjectsResponse.ObjectSummary.builder()
-                        .bucketName(item.objectName()).eTag(item.etag()).size(item.size())
-                        .lastModified(item.lastModified().toInstant()).storageClass(item.storageClass())
-                        .build();
+                Item item = resultItem.get();
+                OssListObjectsResponse.ObjectSummary objectSummary;
+                if (item.isDir()) {
+                    objectSummary = OssListObjectsResponse.ObjectSummary.builder()
+                            .objectName(item.objectName())
+                            .build();
+                } else {
+                    objectSummary = OssListObjectsResponse.ObjectSummary.builder()
+                            .objectName(item.objectName()).eTag(item.etag()).size(item.size())
+                            .lastModified(Optional.ofNullable(item.lastModified()).map(ChronoZonedDateTime::toInstant).orElse(null))
+                            .storageClass(item.storageClass())
+                            .build();
+                }
                 objectSummaries.add(objectSummary);
             } catch (Exception ex) {
                 throw new OssException(ex);
             }
-        });
+        }
         return OssListObjectsResponse.builder().objectSummaries(objectSummaries).build();
     }
 
