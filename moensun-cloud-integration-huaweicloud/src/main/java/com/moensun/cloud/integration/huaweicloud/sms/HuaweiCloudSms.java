@@ -11,7 +11,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,6 +27,13 @@ public class HuaweiCloudSms implements SmsTemplate {
         this.smsConfig = smsConfig;
     }
 
+    @Override
+    public void addTemplates(Map<String, String> templates) {
+        Map<String, String> templatesMap = new HashMap<>();
+        templatesMap.putAll(templates);
+        templatesMap.putAll(smsConfig.getTemplateCodes());
+        smsConfig.setTemplateCodes(templatesMap);
+    }
 
     @Override
     public String template(String code) {

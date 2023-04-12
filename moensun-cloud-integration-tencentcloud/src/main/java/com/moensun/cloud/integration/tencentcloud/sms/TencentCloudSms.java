@@ -10,9 +10,7 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 public class TencentCloudSms implements SmsTemplate {
@@ -22,6 +20,14 @@ public class TencentCloudSms implements SmsTemplate {
     public TencentCloudSms(TencentCloudSmsConfig smsProperties, SmsClient smsClient) {
         this.smsProperties = smsProperties;
         this.smsClient = smsClient;
+    }
+
+    @Override
+    public void addTemplates(Map<String, String> templates) {
+        Map<String, String> templatesMap = new HashMap<>();
+        templatesMap.putAll(templates);
+        templatesMap.putAll(smsProperties.getTemplateCodes());
+        smsProperties.setTemplateCodes(templatesMap);
     }
 
     @Override

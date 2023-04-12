@@ -10,6 +10,7 @@ import com.moensun.cloud.integration.api.sms.SmsTemplate;
 import com.moensun.cloud.integration.api.sms.request.SmsSendRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -26,6 +27,14 @@ public class AliYunSms implements SmsTemplate {
     public AliYunSms(Client client, AliYunSmsConfig aliYunSmsProperties) {
         this.client = client;
         this.aliYunSmsProperties = aliYunSmsProperties;
+    }
+
+    @Override
+    public void addTemplates(Map<String, String> templates) {
+        Map<String, String> templatesMap = new HashMap<>();
+        templatesMap.putAll(templates);
+        templatesMap.putAll(aliYunSmsProperties.getTemplateCodes());
+        aliYunSmsProperties.setTemplateCodes(templatesMap);
     }
 
     @Override
