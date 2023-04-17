@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.moensun.cloud.integration</groupId>
-    <artifactId>moensun-cloud-integrations</artifactId>
+    <artifactId>cloud-integrations</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>MS:CloudIntegrations</name>
     <modules>
-        <module>moensun-cloud-integration-api</module>
-        <module>moensun-cloud-integration-aliyun</module>
-        <module>moensun-cloud-integration-huaweicloud</module>
-        <module>moensun-cloud-integration-tencentcloud</module>
-        <module>moensun-cloud-integration-qiniu</module>
-        <module>moensun-cloud-integration-googlecloud</module>
-        <module>moensun-cloud-integration-other</module>
+        <module>api</module>
+        <module>aliyun</module>
+        <module>huaweicloud</module>
+        <module>tencentcloud</module>
+        <module>qiniu</module>
+        <module>googlecloud</module>
+        <module>other</module>
     </modules>
 
     <properties>
@@ -62,37 +62,37 @@
 
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-api</artifactId>
+                <artifactId>api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-aliyun</artifactId>
+                <artifactId>aliyun</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-huaweicloud</artifactId>
+                <artifactId>huaweicloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-tencentcloud</artifactId>
+                <artifactId>tencentcloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-qiniu</artifactId>
+                <artifactId>qiniu</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-googlecloud</artifactId>
+                <artifactId>googlecloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.cloud.integration</groupId>
-                <artifactId>moensun-cloud-integration-other</artifactId>
+                <artifactId>other</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

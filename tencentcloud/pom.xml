@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>moensun-cloud-integrations</artifactId>
+        <artifactId>cloud-integrations</artifactId>
         <groupId>com.moensun.cloud.integration</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>MS:CloudIntegrations:TencentCloud</name>
-    <artifactId>moensun-cloud-integration-tencentcloud</artifactId>
+    <artifactId>tencentcloud</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.moensun.cloud.integration</groupId>
-            <artifactId>moensun-cloud-integration-api</artifactId>
+            <artifactId>api</artifactId>
         </dependency>
         <!-- qcloud-->
         <dependency>
