@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.moensun.cloud.integration</groupId>
+    <groupId>com.moensun.csi</groupId>
     <artifactId>cloud-integrations</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -61,37 +61,37 @@
 
 
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>aliyun</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>huaweicloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>tencentcloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>qiniu</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>googlecloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.moensun.cloud.integration</groupId>
+                <groupId>com.moensun.csi</groupId>
                 <artifactId>other</artifactId>
                 <version>${project.version}</version>
             </dependency>

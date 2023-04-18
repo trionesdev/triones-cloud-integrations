@@ -1,8 +1,8 @@
 package com.moensun.cloud.integration.huaweicloud.obs;
 
-import com.moensun.cloud.integration.api.oss.request.OssPutObjectRequest;
-import com.moensun.huaweicloud.obs.HuaweiCloudObs;
-import com.moensun.huaweicloud.obs.HuaweiCloudObsConfig;
+import com.moensun.csi.api.oss.request.OssPutObjectRequest;
+import com.moensun.csi.huaweicloud.obs.HuaweiCloudObs;
+import com.moensun.csi.huaweicloud.obs.HuaweiCloudObsConfig;
 import com.obs.services.ObsClient;
 import com.obs.services.model.PutObjectRequest;
 import org.junit.jupiter.api.Test;

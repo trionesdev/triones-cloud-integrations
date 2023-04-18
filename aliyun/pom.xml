@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cloud-integrations</artifactId>
-        <groupId>com.moensun.cloud.integration</groupId>
+        <groupId>com.moensun.csi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.moensun.cloud.integration</groupId>
+            <groupId>com.moensun.csi</groupId>
             <artifactId>api</artifactId>
         </dependency>
         <!--aliyun-->
