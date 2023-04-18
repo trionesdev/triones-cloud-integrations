@@ -1,5 +1,7 @@
 package com.moensun.cloud.integration.huaweicloud.sms;
 
+import com.moensun.huaweicloud.sms.HuaweiCloudSmsClient;
+import com.moensun.huaweicloud.sms.HuaweiCloudSmsRequest;
 import org.junit.jupiter.api.Test;
 
 public class HuaweiCloudSmsTest {
