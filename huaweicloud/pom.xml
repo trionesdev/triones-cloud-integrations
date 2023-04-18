@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.huaweicloud</groupId>
             <artifactId>esdk-obs-java-bundle</artifactId>
-            <version>3.22.3</version>
+            <version>3.22.12</version>
         </dependency>
         <!--        huaweicloud-->
     </dependencies>

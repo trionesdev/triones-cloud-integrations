@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.11.0</version>
+            <version>7.13.0</version>
         </dependency>
         <!--qiniu-->
     </dependencies>

@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.16.0</version>
+            <version>3.16.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

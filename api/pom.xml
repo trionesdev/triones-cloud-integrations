@@ -29,10 +29,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.moensun.commons</groupId>
-            <artifactId>commons-core</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.moensun.commons</groupId>-->
+<!--            <artifactId>commons-core</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
