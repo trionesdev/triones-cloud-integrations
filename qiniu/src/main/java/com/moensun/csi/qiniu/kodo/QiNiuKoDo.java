@@ -6,7 +6,7 @@ import com.moensun.csi.api.oss.request.*;
 import com.moensun.csi.api.oss.response.OssGetObjectResponse;
 import com.moensun.csi.api.oss.response.OssListObjectsResponse;
 import com.moensun.csi.api.oss.response.OssPutObjectResponse;
-import com.moensun.commons.core.util.FilePathUtils;
+import com.moensun.csi.util.OssUtils;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -39,7 +39,7 @@ public class QiNiuKoDo implements OssTemplate {
         String upToken = auth.uploadToken(bucketName);
         try {
             Response response = uploadManager.put(request.getInputStream(), request.getObjectName(), upToken, null, null);
-            return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
+            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
         } catch (QiniuException e) {
             throw new OssException(e);
         }
@@ -52,12 +52,12 @@ public class QiNiuKoDo implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override

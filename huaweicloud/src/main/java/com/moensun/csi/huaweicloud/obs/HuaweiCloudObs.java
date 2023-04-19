@@ -5,7 +5,7 @@ import com.moensun.csi.api.oss.request.*;
 import com.moensun.csi.api.oss.response.OssGetObjectResponse;
 import com.moensun.csi.api.oss.response.OssListObjectsResponse;
 import com.moensun.csi.api.oss.response.OssPutObjectResponse;
-import com.moensun.commons.core.util.FilePathUtils;
+import com.moensun.csi.util.OssUtils;
 import com.obs.services.ObsClient;
 import com.obs.services.model.PutObjectRequest;
 import com.obs.services.model.PutObjectResult;
@@ -35,7 +35,7 @@ public class HuaweiCloudObs implements OssTemplate {
         putObjectRequest.setObjectKey(request.getObjectName());
         putObjectRequest.setInput(request.getInputStream());
         PutObjectResult result = obsClient.putObject(putObjectRequest);
-        return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
+        return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
     }
 
     @Override
@@ -45,12 +45,12 @@ public class HuaweiCloudObs implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override

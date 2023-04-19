@@ -7,7 +7,7 @@ import com.moensun.csi.api.oss.request.*;
 import com.moensun.csi.api.oss.response.OssGetObjectResponse;
 import com.moensun.csi.api.oss.response.OssListObjectsResponse;
 import com.moensun.csi.api.oss.response.OssPutObjectResponse;
-import com.moensun.commons.core.util.FilePathUtils;
+import com.moensun.csi.util.OssUtils;
 import io.minio.*;
 import io.minio.messages.DeleteError;
 import io.minio.messages.DeleteObject;
@@ -63,7 +63,7 @@ public class Minio implements OssTemplate {
                     .contentType(request.getContentType())
                     .build();
             ObjectWriteResponse response = minioClient.putObject(putObjectArgs);
-            return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix + "/" + bucketName)).build();
+            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix + "/" + bucketName)).build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new OssException(e);
@@ -101,12 +101,12 @@ public class Minio implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(), minioUrlPrefix(request.getUrlPrefix(), request.getBucketName()));
+        return OssUtils.joinPrefix(request.getObjectName(), minioUrlPrefix(request.getUrlPrefix(), request.getBucketName()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.removePrefix(request.getObjectUrl(), minioUrlPrefix(request.getUrlPrefix(), request.getBucketName()));
+        return OssUtils.removePrefix(request.getObjectUrl(), minioUrlPrefix(request.getUrlPrefix(), request.getBucketName()));
     }
 
     @Override

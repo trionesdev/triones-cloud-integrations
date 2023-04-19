@@ -10,7 +10,7 @@ import com.moensun.csi.api.oss.request.*;
 import com.moensun.csi.api.oss.response.OssGetObjectResponse;
 import com.moensun.csi.api.oss.response.OssListObjectsResponse;
 import com.moensun.csi.api.oss.response.OssPutObjectResponse;
-import com.moensun.commons.core.util.FilePathUtils;
+import com.moensun.csi.util.OssUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +41,7 @@ public class AliYunOSS implements OssTemplate {
         String urlPrefix = urlPrefix(request.getUrlPrefix());
         try {
             PutObjectResult result = oss.putObject(bucketName, request.getObjectName(), request.getInputStream());
-            return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
+            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new OssException(e);
@@ -55,12 +55,12 @@ public class AliYunOSS implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.joinPrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override

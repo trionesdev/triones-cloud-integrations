@@ -6,7 +6,7 @@ import com.moensun.csi.api.oss.request.*;
 import com.moensun.csi.api.oss.response.OssGetObjectResponse;
 import com.moensun.csi.api.oss.response.OssListObjectsResponse;
 import com.moensun.csi.api.oss.response.OssPutObjectResponse;
-import com.moensun.commons.core.util.FilePathUtils;
+import com.moensun.csi.util.OssUtils;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
@@ -35,7 +35,7 @@ public class TencentCloudCos implements OssTemplate {
             String urlPrefix = urlPrefix(request.getUrlPrefix());
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, request.getObjectName(), request.getInputStream(), new ObjectMetadata());
             cosClient.putObject(putObjectRequest);
-            return OssPutObjectResponse.builder().url(FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
+            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
         } catch (Exception ex) {
             throw new OssException(ex);
         }
@@ -48,12 +48,12 @@ public class TencentCloudCos implements OssTemplate {
 
     @Override
     public String getObjectUrl(OssGetObjectUrlRequest request) {
-        return FilePathUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.joinPrefix(request.getObjectName(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return FilePathUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
