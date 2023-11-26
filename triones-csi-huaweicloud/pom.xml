@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>Triones:CloudIntegrations:HuaweiCloud</name>
-    <artifactId>triones-huaweicloud</artifactId>
+    <artifactId>triones-csi-huaweicloud</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
