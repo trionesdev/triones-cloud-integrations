@@ -3,30 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-integrations</artifactId>
+        <artifactId>triones-cloud-integrations</artifactId>
         <groupId>com.moensun.csi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>MS:CloudIntegrations:GoogleCloud</name>
-    <artifactId>googlecloud</artifactId>
+    <name>Triones:CloudIntegrations:Other</name>
+    <artifactId>triones-other</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>libraries-bom</artifactId>
-                <version>21.0.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -36,14 +24,19 @@
         </dependency>
         <dependency>
             <groupId>com.moensun.csi</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>triones-csi-api</artifactId>
         </dependency>
-        <!--google-->
         <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>google-cloud-storage</artifactId>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.squareup.okhttp3</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <!--google-->
     </dependencies>
 
 </project>

@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-integrations</artifactId>
+        <artifactId>triones-cloud-integrations</artifactId>
         <groupId>com.moensun.csi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>MS:CloudIntegrations:Other</name>
-    <artifactId>other</artifactId>
+    <name>Triones:CloudIntegrations:QiNiu</name>
+    <artifactId>triones-qiniu</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -24,19 +24,15 @@
         </dependency>
         <dependency>
             <groupId>com.moensun.csi</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>triones-csi-api</artifactId>
         </dependency>
+        <!-- qiniu-->
         <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>8.5.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.squareup.okhttp3</groupId>
-                    <artifactId>okhttp</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.13.0</version>
         </dependency>
+        <!--qiniu-->
     </dependencies>
 
 </project>

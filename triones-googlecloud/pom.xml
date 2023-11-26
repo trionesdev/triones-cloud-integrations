@@ -3,18 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cloud-integrations</artifactId>
+        <artifactId>triones-cloud-integrations</artifactId>
         <groupId>com.moensun.csi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>MS:CloudIntegrations:HuaweiCloud</name>
-    <artifactId>huaweicloud</artifactId>
+    <name>Triones:CloudIntegrations:GoogleCloud</name>
+    <artifactId>triones-googlecloud</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>21.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -24,19 +36,14 @@
         </dependency>
         <dependency>
             <groupId>com.moensun.csi</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>triones-csi-api</artifactId>
         </dependency>
+        <!--google-->
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
         </dependency>
-        <!--        huaweicloud-->
-        <dependency>
-            <groupId>com.huaweicloud</groupId>
-            <artifactId>esdk-obs-java-bundle</artifactId>
-            <version>3.22.12</version>
-        </dependency>
-        <!--        huaweicloud-->
+        <!--google-->
     </dependencies>
 
 </project>

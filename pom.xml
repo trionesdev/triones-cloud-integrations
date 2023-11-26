@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.moensun.csi</groupId>
-    <artifactId>cloud-integrations</artifactId>
+    <artifactId>triones-cloud-integrations</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>MS:CloudIntegrations</name>
+    <name>Triones:CloudIntegrations</name>
     <modules>
-        <module>api</module>
-        <module>aliyun</module>
-        <module>huaweicloud</module>
-        <module>tencentcloud</module>
-        <module>qiniu</module>
-        <module>googlecloud</module>
-        <module>other</module>
+        <module>triones-csi-api</module>
+        <module>triones-aliyun</module>
+        <module>triones-huaweicloud</module>
+        <module>triones-tencentcloud</module>
+        <module>triones-qiniu</module>
+        <module>triones-googlecloud</module>
+        <module>triones-other</module>
     </modules>
 
     <properties>
@@ -67,37 +67,37 @@
 
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>api</artifactId>
+                <artifactId>triones-csi-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>aliyun</artifactId>
+                <artifactId>triones-aliyun</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>huaweicloud</artifactId>
+                <artifactId>triones-huaweicloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>tencentcloud</artifactId>
+                <artifactId>triones-tencentcloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>qiniu</artifactId>
+                <artifactId>triones-qiniu</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>googlecloud</artifactId>
+                <artifactId>triones-googlecloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.moensun.csi</groupId>
-                <artifactId>other</artifactId>
+                <artifactId>triones-other</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
