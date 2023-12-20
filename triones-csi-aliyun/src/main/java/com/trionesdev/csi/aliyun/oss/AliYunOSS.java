@@ -60,7 +60,7 @@ public class AliYunOSS implements OssTemplate {
 
     @Override
     public String getObjectName(OssGetObjectNameRequest request) {
-        return OssUtils.joinPrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
+        return OssUtils.removePrefix(request.getObjectUrl(), urlPrefix(request.getUrlPrefix()));
     }
 
     @Override
