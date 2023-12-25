@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>triones-cloud-integrations</artifactId>
-        <groupId>com.trionesdev.csi</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <name>Triones:CSI:HuaweiCloud</name>
-    <artifactId>triones-csi-huaweicloud</artifactId>
+    <parent>
+        <groupId>com.trionesdev.csi</groupId>
+        <artifactId>triones-cloud-integrations</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <name>Triones:CSI:Api:Sms</name>
+    <artifactId>triones-csi-api-sms</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -21,12 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.trionesdev.csi</groupId>
-            <artifactId>triones-csi-huaweicloud-obs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.trionesdev.csi</groupId>
-            <artifactId>triones-csi-huaweicloud-sms</artifactId>
+            <artifactId>triones-csi-api-base</artifactId>
         </dependency>
     </dependencies>
-
 </project>

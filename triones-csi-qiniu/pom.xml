@@ -7,32 +7,25 @@
         <groupId>com.trionesdev.csi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <name>Triones:CloudIntegrations:QiNiu</name>
+    <name>Triones:CSI:QiNiu:Parent</name>
     <artifactId>triones-csi-qiniu</artifactId>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.trionesdev.csi</groupId>
-            <artifactId>triones-csi-api</artifactId>
-        </dependency>
-        <!-- qiniu-->
-        <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.13.0</version>
-        </dependency>
-        <!--qiniu-->
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-qiniu-kodo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
