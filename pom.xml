@@ -11,21 +11,40 @@
     <name>Triones:CloudIntegrations</name>
     <modules>
         <module>triones-csi-api</module>
+        <module>triones-csi-api/triones-csi-api-base</module>
+        <module>triones-csi-api/triones-csi-api-oss</module>
+        <module>triones-csi-api/triones-csi-api-sms</module>
+        <module>triones-csi-api/triones-csi-api-ocr</module>
         <module>triones-csi-aliyun</module>
+        <module>triones-csi-aliyun/triones-csi-aliyun-oss</module>
+        <module>triones-csi-aliyun/triones-csi-aliyun-sms</module>
         <module>triones-csi-huaweicloud</module>
-        <module>triones-csi-tencentcloud</module>
+        <module>triones-csi-huaweicloud/triones-csi-huaweicloud-obs</module>
+        <module>triones-csi-huaweicloud/triones-csi-huaweicloud-sms</module>
+        <module>triones-csi-tencentcloud-parent</module>
         <module>triones-csi-qiniu</module>
+        <module>triones-csi-qiniu/triones-csi-qiniu-kodo</module>
         <module>triones-csi-googlecloud</module>
-        <module>triones-csi-other</module>
+        <module>triones-csi-googlecloud/triones-csi-googlecloud-storage</module>
+        <module>triones-csi-selfhosted</module>
+        <module>triones-csi-selfhosted/triones-csi-minio</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>21.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
@@ -65,6 +84,7 @@
                 <version>4.10.0</version>
             </dependency>
 
+            <!--            api-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-api</artifactId>
@@ -72,9 +92,44 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-api-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-api-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-api-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-api-ocr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            api-->
+
+            <!--            aliyun-->
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-aliyun</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-aliyun-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-aliyun-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            aliyun-->
+            <!--huaweicloud-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-huaweicloud</artifactId>
@@ -82,9 +137,39 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-huaweicloud-obs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-huaweicloud-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--huaweicloud-->
+
+            <!--            tencentcloud-->
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-tencentcloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-tencentcloud-cos</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-tencentcloud-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-tencentcloud-ocr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            tencentcloud-->
+            <!--            qiniu-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-qiniu</artifactId>
@@ -92,14 +177,35 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-qiniu-kodo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            qiniu-->
+            <!--            googldcloud-->
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-googlecloud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
-                <artifactId>triones-csi-other</artifactId>
+                <artifactId>triones-csi-googlecloud-storage</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!--            googldcloud-->
+
+            <!--            self-hosted-->
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-selfhosted</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-minio</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            self-hosted-->
 
         </dependencies>
     </dependencyManagement>
@@ -184,7 +290,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 
 
 </project>
