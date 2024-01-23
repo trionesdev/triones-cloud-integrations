@@ -27,7 +27,7 @@
         <module>triones-csi-huaweicloud</module>
         <module>triones-csi-huaweicloud/triones-csi-huaweicloud-obs</module>
         <module>triones-csi-huaweicloud/triones-csi-huaweicloud-sms</module>
-        <module>triones-csi-tencentcloud</module>
+
         <module>triones-csi-qiniu</module>
         <module>triones-csi-qiniu/triones-csi-qiniu-kodo</module>
         <module>triones-csi-googlecloud</module>
