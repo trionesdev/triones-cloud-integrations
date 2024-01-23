@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -22,7 +23,7 @@ public class HuaweiCloudSms implements SmsTemplate {
     private final HuaweiCloudSmsClient smsClient;
     private final HuaweiCloudSmsConfig smsConfig;
 
-    public HuaweiCloudSms(HuaweiCloudSmsClient cloudSmsClient ,HuaweiCloudSmsConfig smsConfig) {
+    public HuaweiCloudSms(HuaweiCloudSmsClient cloudSmsClient, HuaweiCloudSmsConfig smsConfig) {
         this.smsClient = cloudSmsClient;
         this.smsConfig = smsConfig;
     }
@@ -43,14 +44,15 @@ public class HuaweiCloudSms implements SmsTemplate {
     @Override
     public void send(SmsSendRequest sendRequest) {
         String signName = StringUtils.isNotBlank(sendRequest.getSignName()) ? sendRequest.getSignName() : smsConfig.getSignName();
-        String regionId = StringUtils.isNotBlank(sendRequest.getRegionId())? sendRequest.getRegionId() : smsConfig.getRegionId();
+        String regionId = StringUtils.isNotBlank(sendRequest.getRegionId()) ? sendRequest.getRegionId() : smsConfig.getRegionId();
+        String sender = Optional.ofNullable(sendRequest.getExtra()).map(extra -> extra.get("sender")).orElse(smsConfig.getSender());
         List<String> params = Lists.newArrayList();
-        if(CollectionUtils.isNotEmpty(sendRequest.getParams())){
+        if (CollectionUtils.isNotEmpty(sendRequest.getParams())) {
             params = sendRequest.getParams().stream().sorted(Comparator.comparing(SmsParam::getIndex)).map(SmsParam::getValue).collect(Collectors.toList());
         }
-        try{
+        try {
             HuaweiCloudSmsRequest request = HuaweiCloudSmsRequest.builder()
-                    .sender(sendRequest.getSender())
+                    .sender(sender)
                     .templateId(sendRequest.getTemplateCode())
                     .receiver(sendRequest.getPhoneNumbers())
                     .templateParams(new ObjectMapper().writeValueAsString(params))
@@ -58,7 +60,7 @@ public class HuaweiCloudSms implements SmsTemplate {
                     .regionId(regionId)
                     .build();
             this.smsClient.request(request);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new SmsException(ex);
         }
     }

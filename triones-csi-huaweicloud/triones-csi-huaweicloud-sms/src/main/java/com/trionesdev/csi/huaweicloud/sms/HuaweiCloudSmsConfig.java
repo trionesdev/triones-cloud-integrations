@@ -13,6 +13,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HuaweiCloudSmsConfig implements Serializable {
+    private String sender;
     private String regionId;
     private String signName;
     private Map<String,String> templateCodes;

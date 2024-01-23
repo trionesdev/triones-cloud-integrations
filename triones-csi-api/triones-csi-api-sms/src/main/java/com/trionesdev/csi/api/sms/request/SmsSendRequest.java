@@ -16,7 +16,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SmsSendRequest {
-    private String sender;
     private String signName;
     private String templateCode;
     private String phoneNumbers;
