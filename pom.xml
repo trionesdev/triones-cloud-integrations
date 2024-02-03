@@ -34,6 +34,8 @@
         <module>triones-csi-googlecloud/triones-csi-googlecloud-storage</module>
         <module>triones-csi-selfhosted</module>
         <module>triones-csi-selfhosted/triones-csi-minio</module>
+        <module>triones-csi-azure</module>
+        <module>triones-csi-azure/triones-csi-azure-blob</module>
     </modules>
 
     <properties>
@@ -199,6 +201,14 @@
                 <version>${project.version}</version>
             </dependency>
             <!--            googldcloud-->
+
+            <!--            azure-->
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-azure-blob</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--            azure-->
 
             <!--            self-hosted-->
             <dependency>

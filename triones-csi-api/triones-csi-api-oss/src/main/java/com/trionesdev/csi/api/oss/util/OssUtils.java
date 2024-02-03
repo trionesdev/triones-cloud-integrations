@@ -39,4 +39,14 @@ public class OssUtils {
         }
     }
 
+    public static String pathJoin(String... paths) {
+        if (paths.length == 0) {
+            return "";
+        }
+        for (int i = 0; i < paths.length; i++) {
+            paths[i] = StringUtils.removeEnd(StringUtils.removeStart(paths[i], "/"), "/");
+        }
+        return StringUtils.join(paths, "/");
+    }
+
 }
