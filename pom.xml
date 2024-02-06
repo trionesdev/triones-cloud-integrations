@@ -205,6 +205,11 @@
             <!--            azure-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-azure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-azure-blob</artifactId>
                 <version>${project.version}</version>
             </dependency>
