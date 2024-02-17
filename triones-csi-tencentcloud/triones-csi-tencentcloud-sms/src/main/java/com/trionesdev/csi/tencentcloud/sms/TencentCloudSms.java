@@ -1,5 +1,6 @@
 package com.trionesdev.csi.tencentcloud.sms;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.trionesdev.csi.api.sms.SmsException;
 import com.trionesdev.csi.api.sms.SmsParam;
 import com.trionesdev.csi.api.sms.SmsTemplate;
@@ -56,6 +57,14 @@ public class TencentCloudSms implements SmsTemplate {
                 req.setTemplateParamSet(strings.toArray(new String[strings.size()]));
             }
             SendSmsResponse res = smsClient.SendSms(req);
+            if (ArrayUtil.isNotEmpty(res.getSendStatusSet())) {
+                Arrays.stream(res.getSendStatusSet()).forEach(sendStatus -> {
+                    if (!Objects.equals("Ok", sendStatus.getCode())) {
+                        log.error("短信发送失败，错误码：{}，错误信息：{}", sendStatus.getCode(), sendStatus.getMessage());
+                        throw new SmsException(String.format("短信发送失败，错误码：%s，错误信息：%s", sendStatus.getCode(), sendStatus.getMessage()));
+                    }
+                });
+            }
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
             throw new SmsException(ex);
