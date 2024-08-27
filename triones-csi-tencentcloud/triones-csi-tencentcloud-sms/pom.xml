@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-    <name>Triones:CSI:TencentCloud:sms</name>
+    <name>Triones:CSI:TencentCloud:Sms</name>
     <artifactId>triones-csi-tencentcloud-sms</artifactId>
 
     <properties>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.738</version>
+            <version>3.1.1089</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.squareup.okhttp3</groupId>

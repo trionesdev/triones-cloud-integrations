@@ -36,6 +36,8 @@
         <module>triones-csi-selfhosted/triones-csi-minio</module>
         <module>triones-csi-azure</module>
         <module>triones-csi-azure/triones-csi-azure-blob</module>
+        <module>triones-csi-api/triones-csi-api-ses</module>
+        <module>triones-csi-tencentcloud/triones-csi-tencentcloud-ses</module>
     </modules>
 
     <properties>
@@ -111,6 +113,11 @@
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-api-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-api-ses</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

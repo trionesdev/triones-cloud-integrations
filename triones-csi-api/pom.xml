@@ -27,5 +27,9 @@
             <groupId>com.trionesdev.csi</groupId>
             <artifactId>triones-csi-api-sms</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.trionesdev.csi</groupId>
+            <artifactId>triones-csi-api-ses</artifactId>
+        </dependency>
     </dependencies>
 </project>
