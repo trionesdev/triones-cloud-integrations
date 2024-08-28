@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.util.Map;
 
 @Data
 @SuperBuilder
@@ -13,4 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class TencentCloudSesConfig implements Serializable {
     private String region;
+    private String fromAddress;
+    private String replyAddress;
+    private Map<String,String> templateCodes;
 }

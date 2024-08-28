@@ -31,6 +31,11 @@ public class TencentCloudSes implements SesTemplate {
         this.sesClient = sesClient;
     }
 
+    @Override
+    public String template(String code) {
+        return config.getTemplateCodes().get(code);
+    }
+
     public SesSendEmailResponse sendEmail(SesSendEmailRequest request) {
         try {
             SendEmailRequest sendEmailRequest = new SendEmailRequest();
