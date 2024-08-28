@@ -13,8 +13,9 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TencentCloudSesConfig implements Serializable {
+    private String endpoint;
     private String region;
     private String fromAddress;
     private String replyAddress;
-    private Map<String,String> templateCodes;
+    private Map<String, String> templateCodes;
 }
