@@ -49,8 +49,7 @@ public class TencentCloudSms implements SmsTemplate {
             String extendCode = "";
             req.setExtendCode(extendCode);
             req.setTemplateId(sendRequest.getTemplateCode());
-            String[] phoneNumberSet = sendRequest.getPhoneNumbers().split(",");
-            req.setPhoneNumberSet(phoneNumberSet);
+            req.setPhoneNumberSet(sendRequest.getPhoneNumbers().toArray(new String[0]));
             if (CollectionUtils.isNotEmpty(sendRequest.getVariables())) {
                 List<String> strings = new ArrayList<>();
                 sendRequest.getVariables().stream().sorted(Comparator.comparing(SmsVariable::getIndex)).forEach(smsParam -> strings.add(smsParam.getValue()));

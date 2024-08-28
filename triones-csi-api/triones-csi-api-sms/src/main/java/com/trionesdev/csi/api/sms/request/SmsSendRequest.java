@@ -18,7 +18,7 @@ import java.util.Map;
 public class SmsSendRequest {
     private String signName;
     private String templateCode;
-    private String phoneNumbers;
+    private List<String> phoneNumbers;
     private List<SmsVariable> variables;
     private String regionId;
     private String content;
