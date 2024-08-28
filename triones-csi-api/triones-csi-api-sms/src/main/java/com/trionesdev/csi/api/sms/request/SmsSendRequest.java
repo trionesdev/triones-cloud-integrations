@@ -1,6 +1,6 @@
 package com.trionesdev.csi.api.sms.request;
 
-import com.trionesdev.csi.api.sms.SmsParam;
+import com.trionesdev.csi.api.sms.SmsVariable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class SmsSendRequest {
     private String signName;
     private String templateCode;
     private String phoneNumbers;
-    private List<SmsParam> params;
+    private List<SmsVariable> variables;
     private String regionId;
     private String content;
     private Map<String,String> extra;

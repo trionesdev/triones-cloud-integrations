@@ -12,4 +12,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TencentCloudSesConfig implements Serializable {
+    private String region;
 }

@@ -22,6 +22,7 @@
         <module>triones-csi-tencentcloud</module>
         <module>triones-csi-tencentcloud/triones-csi-tencentcloud-cos</module>
         <module>triones-csi-tencentcloud/triones-csi-tencentcloud-sms</module>
+        <module>triones-csi-tencentcloud/triones-csi-tencentcloud-ses</module>
         <module>triones-csi-tencentcloud/triones-csi-tencentcloud-ocr</module>
 
         <module>triones-csi-huaweicloud</module>
@@ -37,7 +38,7 @@
         <module>triones-csi-azure</module>
         <module>triones-csi-azure/triones-csi-azure-blob</module>
         <module>triones-csi-api/triones-csi-api-ses</module>
-        <module>triones-csi-tencentcloud/triones-csi-tencentcloud-ses</module>
+
     </modules>
 
     <properties>
@@ -87,6 +88,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>4.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.16.1</version>
             </dependency>
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
@@ -176,6 +182,11 @@
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>triones-csi-tencentcloud-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-tencentcloud-ses</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

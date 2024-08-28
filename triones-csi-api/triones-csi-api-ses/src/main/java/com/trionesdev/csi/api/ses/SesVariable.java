@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SesParam {
+public class SesVariable {
     private String key;
     private String value;
     private Integer index;

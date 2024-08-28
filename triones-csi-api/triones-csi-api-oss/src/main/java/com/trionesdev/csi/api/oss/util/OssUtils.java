@@ -1,8 +1,10 @@
 package com.trionesdev.csi.api.oss.util;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.URLUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class OssUtils {
     public static String joinPrefix(String path, String prefix) {
@@ -13,9 +15,9 @@ public class OssUtils {
         } else if (!path.toLowerCase().startsWith("http") && !path.toLowerCase().startsWith("https")) {
             String resPath = prefix + "/" + path;
             if (resPath.toLowerCase().startsWith("http") || resPath.toLowerCase().startsWith("https")) {
-                return URLUtil.normalize(resPath);
+                return FilenameUtils.normalize(resPath).replaceAll("\\\\","/").replace("http:/","http://").replace("https:/","https://");
             } else {
-                return FileUtil.normalize(resPath);
+                return FilenameUtils.normalize(resPath);
             }
         } else {
             return path;

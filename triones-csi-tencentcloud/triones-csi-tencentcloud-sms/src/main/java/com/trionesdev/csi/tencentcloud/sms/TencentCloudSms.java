@@ -1,8 +1,7 @@
 package com.trionesdev.csi.tencentcloud.sms;
 
-import cn.hutool.core.util.ArrayUtil;
 import com.trionesdev.csi.api.sms.SmsException;
-import com.trionesdev.csi.api.sms.SmsParam;
+import com.trionesdev.csi.api.sms.SmsVariable;
 import com.trionesdev.csi.api.sms.SmsTemplate;
 import com.trionesdev.csi.api.sms.request.SmsSendRequest;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
@@ -10,6 +9,7 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
 
@@ -51,13 +51,13 @@ public class TencentCloudSms implements SmsTemplate {
             req.setTemplateId(sendRequest.getTemplateCode());
             String[] phoneNumberSet = sendRequest.getPhoneNumbers().split(",");
             req.setPhoneNumberSet(phoneNumberSet);
-            if (CollectionUtils.isNotEmpty(sendRequest.getParams())) {
+            if (CollectionUtils.isNotEmpty(sendRequest.getVariables())) {
                 List<String> strings = new ArrayList<>();
-                sendRequest.getParams().stream().sorted(Comparator.comparing(SmsParam::getIndex)).forEach(smsParam -> strings.add(smsParam.getValue()));
+                sendRequest.getVariables().stream().sorted(Comparator.comparing(SmsVariable::getIndex)).forEach(smsParam -> strings.add(smsParam.getValue()));
                 req.setTemplateParamSet(strings.toArray(new String[strings.size()]));
             }
             SendSmsResponse res = smsClient.SendSms(req);
-            if (ArrayUtil.isNotEmpty(res.getSendStatusSet())) {
+            if (ArrayUtils.isNotEmpty(res.getSendStatusSet())) {
                 Arrays.stream(res.getSendStatusSet()).forEach(sendStatus -> {
                     if (!Objects.equals("Ok", sendStatus.getCode())) {
                         log.error("短信发送失败，错误码：{}，错误信息：{}", sendStatus.getCode(), sendStatus.getMessage());

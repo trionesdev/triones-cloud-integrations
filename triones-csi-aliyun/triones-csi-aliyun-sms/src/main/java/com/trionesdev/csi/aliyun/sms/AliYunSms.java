@@ -51,9 +51,9 @@ public class AliYunSms implements SmsTemplate {
         if (StringUtils.isNoneBlank(sendRequest.getTemplateCode())) {
             sendSmsRequest.setTemplateCode(sendRequest.getTemplateCode());
         }
-        if (CollectionUtils.isNotEmpty(sendRequest.getParams())) {
+        if (CollectionUtils.isNotEmpty(sendRequest.getVariables())) {
             Map<String, String> paramsMap = new HashMap<>();
-            sendRequest.getParams().forEach(smsParam -> paramsMap.put(smsParam.getKey(), smsParam.getValue()));
+            sendRequest.getVariables().forEach(smsParam -> paramsMap.put(smsParam.getKey(), smsParam.getValue()));
             sendSmsRequest.setTemplateParam(new Gson().toJson(paramsMap));
         }
         try {

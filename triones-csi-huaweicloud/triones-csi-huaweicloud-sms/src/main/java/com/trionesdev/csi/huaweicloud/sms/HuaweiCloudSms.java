@@ -3,7 +3,7 @@ package com.trionesdev.csi.huaweicloud.sms;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.trionesdev.csi.api.sms.SmsException;
-import com.trionesdev.csi.api.sms.SmsParam;
+import com.trionesdev.csi.api.sms.SmsVariable;
 import com.trionesdev.csi.api.sms.SmsTemplate;
 import com.trionesdev.csi.api.sms.request.SmsSendRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +47,8 @@ public class HuaweiCloudSms implements SmsTemplate {
         String regionId = StringUtils.isNotBlank(sendRequest.getRegionId()) ? sendRequest.getRegionId() : smsConfig.getRegionId();
         String sender = Optional.ofNullable(sendRequest.getExtra()).map(extra -> extra.get("sender")).orElse(smsConfig.getSender());
         List<String> params = Lists.newArrayList();
-        if (CollectionUtils.isNotEmpty(sendRequest.getParams())) {
-            params = sendRequest.getParams().stream().sorted(Comparator.comparing(SmsParam::getIndex)).map(SmsParam::getValue).collect(Collectors.toList());
+        if (CollectionUtils.isNotEmpty(sendRequest.getVariables())) {
+            params = sendRequest.getVariables().stream().sorted(Comparator.comparing(SmsVariable::getIndex)).map(SmsVariable::getValue).collect(Collectors.toList());
         }
         try {
             HuaweiCloudSmsRequest request = HuaweiCloudSmsRequest.builder()
