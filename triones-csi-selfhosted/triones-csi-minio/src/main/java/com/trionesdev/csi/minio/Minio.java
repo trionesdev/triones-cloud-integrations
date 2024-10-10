@@ -146,7 +146,7 @@ public class Minio implements OssTemplate {
     }
 
     @Override
-    public Boolean objectExists(OssObjectExistRequest request) {
+    public Boolean objectExist(OssObjectExistRequest request) {
         String bucketName = bucketName(request.getBucketName());
         try {
             minioClient.statObject(StatObjectArgs.builder().bucket(bucketName).object(request.getObjectName()).build());

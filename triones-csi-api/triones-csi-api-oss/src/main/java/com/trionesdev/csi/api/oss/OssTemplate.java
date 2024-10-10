@@ -19,5 +19,5 @@ public interface OssTemplate {
 
     OssListObjectsResponse listObjects(OssListObjectsRequest request);
 
-    Boolean objectExists(OssObjectExistRequest request);
+    Boolean objectExist(OssObjectExistRequest request);
 }

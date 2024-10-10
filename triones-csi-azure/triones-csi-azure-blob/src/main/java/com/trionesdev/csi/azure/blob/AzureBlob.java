@@ -56,7 +56,7 @@ public class AzureBlob implements OssTemplate {
     }
 
     @Override
-    public Boolean objectExists(OssObjectExistRequest request) {
+    public Boolean objectExist(OssObjectExistRequest request) {
         return null;
     }
 
