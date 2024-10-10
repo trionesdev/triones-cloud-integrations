@@ -18,4 +18,6 @@ public interface OssTemplate {
     String getObjectName(OssGetObjectNameRequest request);
 
     OssListObjectsResponse listObjects(OssListObjectsRequest request);
+
+    Boolean objectExists(OssObjectExistRequest request);
 }

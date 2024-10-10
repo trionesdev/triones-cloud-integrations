@@ -58,6 +58,12 @@ public class HuaweiCloudObs implements OssTemplate {
         return null;
     }
 
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        return obsClient.doesObjectExist(bucketName, request.getObjectName());
+    }
+
     private String bucketName(String bucketName) {
         return StringUtils.isNotBlank(bucketName) ? bucketName : huaweiCloudObsConfig.getBucket();
     }

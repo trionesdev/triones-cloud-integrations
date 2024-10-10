@@ -61,6 +61,12 @@ public class TencentCloudCos implements OssTemplate {
         return null;
     }
 
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        return cosClient.doesObjectExist(bucketName, request.getObjectName());
+    }
+
     private String bucketName(String bucketName) {
         return StringUtils.isNotBlank(bucketName) ? bucketName : tencentCloudCosProperties.getBucket();
     }

@@ -1,6 +1,7 @@
 package com.trionesdev.csi.aliyun.oss;
 
 import com.aliyun.oss.OSS;
+import com.aliyun.oss.model.GenericRequest;
 import com.aliyun.oss.model.ListObjectsV2Request;
 import com.aliyun.oss.model.ListObjectsV2Result;
 import com.aliyun.oss.model.PutObjectResult;
@@ -80,6 +81,13 @@ public class AliYunOSS implements OssTemplate {
                     .build()).collect(Collectors.toList());
         }
         return OssListObjectsResponse.builder().objectSummaries(objectSummaries).build();
+    }
+
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        GenericRequest genericRequest = new GenericRequest(bucketName, request.getObjectName());
+        return oss.doesObjectExist(genericRequest);
     }
 
     private String bucketName(String bucketName) {

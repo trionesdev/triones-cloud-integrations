@@ -6,12 +6,7 @@ import com.google.cloud.storage.Storage;
 import com.google.common.io.ByteStreams;
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
-import com.trionesdev.csi.api.oss.request.OssGetObjectNameRequest;
-import com.trionesdev.csi.api.oss.request.OssGetObjectRequest;
-import com.trionesdev.csi.api.oss.request.OssGetObjectUrlRequest;
-import com.trionesdev.csi.api.oss.request.OssListObjectsRequest;
-import com.trionesdev.csi.api.oss.request.OssPutObjectRequest;
-import com.trionesdev.csi.api.oss.request.OssRemoveObjectsRequest;
+import com.trionesdev.csi.api.oss.request.*;
 import com.trionesdev.csi.api.oss.response.OssGetObjectResponse;
 import com.trionesdev.csi.api.oss.response.OssListObjectsResponse;
 import com.trionesdev.csi.api.oss.response.OssPutObjectResponse;
@@ -71,6 +66,12 @@ public class GoogleStorage implements OssTemplate {
 
     @Override
     public OssListObjectsResponse listObjects(OssListObjectsRequest request) {
+        return null;
+    }
+
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        String bucketName = bucketName(request.getBucketName());
         return null;
     }
 

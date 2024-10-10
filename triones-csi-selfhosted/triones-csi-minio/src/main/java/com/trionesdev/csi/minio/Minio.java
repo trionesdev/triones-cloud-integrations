@@ -3,23 +3,12 @@ package com.trionesdev.csi.minio;
 
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
-import com.trionesdev.csi.api.oss.request.OssGetObjectNameRequest;
-import com.trionesdev.csi.api.oss.request.OssGetObjectRequest;
-import com.trionesdev.csi.api.oss.request.OssGetObjectUrlRequest;
-import com.trionesdev.csi.api.oss.request.OssListObjectsRequest;
-import com.trionesdev.csi.api.oss.request.OssPutObjectRequest;
-import com.trionesdev.csi.api.oss.request.OssRemoveObjectsRequest;
+import com.trionesdev.csi.api.oss.request.*;
 import com.trionesdev.csi.api.oss.response.OssGetObjectResponse;
 import com.trionesdev.csi.api.oss.response.OssListObjectsResponse;
 import com.trionesdev.csi.api.oss.response.OssPutObjectResponse;
 import com.trionesdev.csi.api.oss.util.OssUtils;
-import io.minio.GetObjectArgs;
-import io.minio.ListObjectsArgs;
-import io.minio.MinioClient;
-import io.minio.ObjectWriteResponse;
-import io.minio.PutObjectArgs;
-import io.minio.RemoveObjectsArgs;
-import io.minio.Result;
+import io.minio.*;
 import io.minio.messages.DeleteError;
 import io.minio.messages.DeleteObject;
 import io.minio.messages.Item;
@@ -154,6 +143,17 @@ public class Minio implements OssTemplate {
             }
         }
         return OssListObjectsResponse.builder().objectSummaries(objectSummaries).build();
+    }
+
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        String bucketName = bucketName(request.getBucketName());
+        try {
+            minioClient.statObject(StatObjectArgs.builder().bucket(bucketName).object(request.getObjectName()).build());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private String bucketName(String bucketName) {
