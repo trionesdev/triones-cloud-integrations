@@ -54,7 +54,7 @@ public class HuaweiCloudSms implements SmsTemplate {
             HuaweiCloudSmsRequest request = HuaweiCloudSmsRequest.builder()
                     .sender(sender)
                     .templateId(sendRequest.getTemplateCode())
-                    .receiver(sendRequest.getPhoneNumbers())
+                    .receiver(StringUtils.join(sendRequest.getPhoneNumbers(), ","))
                     .templateParams(new ObjectMapper().writeValueAsString(params))
                     .signature(signName)
                     .regionId(regionId)

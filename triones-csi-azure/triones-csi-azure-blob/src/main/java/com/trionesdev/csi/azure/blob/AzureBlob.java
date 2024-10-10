@@ -55,6 +55,11 @@ public class AzureBlob implements OssTemplate {
         return null;
     }
 
+    @Override
+    public Boolean objectExists(OssObjectExistRequest request) {
+        return null;
+    }
+
     private String urlPrefix(String urlPrefix) {
         return StringUtils.isNotBlank(urlPrefix) ? OssUtils.pathJoin(urlPrefix, blobContainerClient.getBlobContainerName()) : blobContainerClient.getBlobContainerUrl();
     }
