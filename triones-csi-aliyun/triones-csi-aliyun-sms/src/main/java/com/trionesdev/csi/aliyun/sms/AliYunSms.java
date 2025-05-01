@@ -46,7 +46,7 @@ public class AliYunSms implements SmsTemplate {
         String signName = StringUtils.isNotBlank(sendRequest.getSignName()) ? sendRequest.getSignName() : aliYunSmsProperties.getSignName();
 
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
-                .setPhoneNumbers(StringUtils.joinWith(",", sendRequest.getPhoneNumbers()))
+                .setPhoneNumbers(StringUtils.joinWith(",", sendRequest.getPhoneNumbers().toArray()))
                 .setSignName(signName);
         if (StringUtils.isNoneBlank(sendRequest.getTemplateCode())) {
             sendSmsRequest.setTemplateCode(sendRequest.getTemplateCode());
