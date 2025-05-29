@@ -1,6 +1,7 @@
 package com.trionesdev.csi.aliyun.oss;
 
 import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GenericRequest;
 import com.aliyun.oss.model.ListObjectsV2Request;
 import com.aliyun.oss.model.ListObjectsV2Result;
@@ -22,12 +23,11 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class AliYunOSS implements OssTemplate {
-
     private final OSS oss;
     private final AliYunOssConfig aliYunOssProperties;
 
-    public AliYunOSS(OSS oss, AliYunOssConfig aliYunOssProperties) {
-        this.oss = oss;
+    public AliYunOSS(AliYunOssConfig aliYunOssProperties) {
+        this.oss = new OSSClientBuilder().build(aliYunOssProperties.getEndpoint(), aliYunOssProperties.getAccessKeyId(), aliYunOssProperties.getAccessKeySecret());
         this.aliYunOssProperties = aliYunOssProperties;
     }
 
