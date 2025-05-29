@@ -1,6 +1,9 @@
 package com.trionesdev.csi.tencentcloud.ses;
 
 import com.google.gson.Gson;
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.ses.v20201002.SesClient;
 import com.tencentcloudapi.ses.v20201002.models.SendEmailRequest;
 import com.tencentcloudapi.ses.v20201002.models.SendEmailResponse;
@@ -24,9 +27,22 @@ public class TencentCloudSes implements SesTemplate {
     private final TencentCloudSesConfig config;
     private final SesClient sesClient;
 
-    public TencentCloudSes(TencentCloudSesConfig config, SesClient sesClient) {
+    public SesClient sesClient(String secretId, String secretKey, String region) {
+        Credential cred = new Credential(secretId, secretKey);
+        HttpProfile httpProfile = new HttpProfile();
+        if (StringUtils.isBlank(config.getEndpoint())) {
+            httpProfile.setEndpoint("ses.tencentcloudapi.com");
+        } else {
+            httpProfile.setEndpoint(config.getEndpoint());
+        }
+        ClientProfile clientProfile = new ClientProfile();
+        clientProfile.setHttpProfile(httpProfile);
+        return new SesClient(cred, region, clientProfile);
+    }
+
+    public TencentCloudSes(TencentCloudSesConfig config) {
+        this.sesClient = sesClient(config.getSecretId(), config.getSecretKey(), config.getRegion());
         this.config = config;
-        this.sesClient = sesClient;
     }
 
     @Override
@@ -37,14 +53,14 @@ public class TencentCloudSes implements SesTemplate {
     public SesSendEmailResponse sendEmail(SesSendEmailRequest request) {
         try {
             SendEmailRequest sendEmailRequest = new SendEmailRequest();
-            if (StringUtils.isNotBlank(request.getFromAddress())){
+            if (StringUtils.isNotBlank(request.getFromAddress())) {
                 sendEmailRequest.setFromEmailAddress(request.getFromAddress());
-            }else {
+            } else {
                 sendEmailRequest.setFromEmailAddress(config.getFromAddress());
             }
-            if (StringUtils.isNotBlank(request.getReplyAddress())){
+            if (StringUtils.isNotBlank(request.getReplyAddress())) {
                 sendEmailRequest.setReplyToAddresses(request.getReplyAddress());
-            }else {
+            } else {
                 sendEmailRequest.setReplyToAddresses(config.getReplyAddress());
             }
             sendEmailRequest.setSubject(request.getSubject());

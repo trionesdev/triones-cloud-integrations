@@ -1,5 +1,8 @@
 package com.trionesdev.csi.tencentcloud.sms;
 
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.common.profile.HttpProfile;
 import com.trionesdev.csi.api.sms.SmsException;
 import com.trionesdev.csi.api.sms.SmsVariable;
 import com.trionesdev.csi.api.sms.SmsTemplate;
@@ -18,9 +21,23 @@ public class TencentCloudSms implements SmsTemplate {
     private final TencentCloudSmsConfig smsProperties;
     private final SmsClient smsClient;
 
-    public TencentCloudSms(TencentCloudSmsConfig smsProperties, SmsClient smsClient) {
+    public SmsClient smsClient(String secretId, String secretKey) {
+        HttpProfile httpProfile = new HttpProfile();
+        httpProfile.setReqMethod("POST");
+        httpProfile.setConnTimeout(60);
+        httpProfile.setEndpoint("sms.tencentcloudapi.com");
+        ClientProfile clientProfile = new ClientProfile();
+        clientProfile.setSignMethod("HmacSHA256");
+        clientProfile.setHttpProfile(httpProfile);
+
+        Credential credential = new Credential(secretId, secretKey);
+        return new SmsClient(credential, "ap-guangzhou", clientProfile);
+    }
+
+    public TencentCloudSms(TencentCloudSmsConfig smsProperties) {
+
         this.smsProperties = smsProperties;
-        this.smsClient = smsClient;
+        this.smsClient = smsClient(smsProperties.getSecretId(), smsProperties.getSecretKey());
     }
 
     @Override

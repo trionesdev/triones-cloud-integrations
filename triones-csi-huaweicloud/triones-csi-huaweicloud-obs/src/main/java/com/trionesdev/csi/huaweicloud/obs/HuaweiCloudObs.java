@@ -15,8 +15,8 @@ public class HuaweiCloudObs implements OssTemplate {
     private final ObsClient obsClient;
     private final HuaweiCloudObsConfig huaweiCloudObsConfig;
 
-    public HuaweiCloudObs(ObsClient obsClient, HuaweiCloudObsConfig huaweiCloudObsConfig) {
-        this.obsClient = obsClient;
+    public HuaweiCloudObs(HuaweiCloudObsConfig huaweiCloudObsConfig) {
+        this.obsClient = new ObsClient(huaweiCloudObsConfig.getAccessKeyId(), huaweiCloudObsConfig.getSecretAccessKey(), huaweiCloudObsConfig.getEndpoint());
         this.huaweiCloudObsConfig = huaweiCloudObsConfig;
     }
 

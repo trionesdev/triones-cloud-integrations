@@ -23,8 +23,8 @@ public class HuaweiCloudSms implements SmsTemplate {
     private final HuaweiCloudSmsClient smsClient;
     private final HuaweiCloudSmsConfig smsConfig;
 
-    public HuaweiCloudSms(HuaweiCloudSmsClient cloudSmsClient, HuaweiCloudSmsConfig smsConfig) {
-        this.smsClient = cloudSmsClient;
+    public HuaweiCloudSms( HuaweiCloudSmsConfig smsConfig) {
+        this.smsClient = new HuaweiCloudSmsClient(smsConfig.getAppKey(), smsConfig.getAppSecret());
         this.smsConfig = smsConfig;
     }
 

@@ -2,6 +2,8 @@ package com.trionesdev.csi.azure.blob;
 
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.trionesdev.csi.api.oss.OssTemplate;
 import com.trionesdev.csi.api.oss.request.*;
 import com.trionesdev.csi.api.oss.response.OssGetObjectResponse;
@@ -16,8 +18,13 @@ public class AzureBlob implements OssTemplate {
     private final BlobContainerClient blobContainerClient;
     private final AzureBlobConfig azureBlobConfig;
 
-    public AzureBlob(BlobContainerClient blobContainerClient, AzureBlobConfig azureBlobConfig) {
-        this.blobContainerClient = blobContainerClient;
+    public AzureBlob( AzureBlobConfig azureBlobConfig) {
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
+                .connectionString(azureBlobConfig.getConnectionString())
+                .buildClient();
+
+        // 获取 BlobContainerClient 对象
+        this.blobContainerClient = blobServiceClient.getBlobContainerClient(azureBlobConfig.getContainerName());
         this.azureBlobConfig = azureBlobConfig;
     }
 

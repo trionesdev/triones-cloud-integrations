@@ -30,8 +30,10 @@ public class Minio implements OssTemplate {
     private final MinioClient minioClient;
     private final MinioConfig minioProperties;
 
-    public Minio(MinioClient minioClient, MinioConfig minioProperties) {
-        this.minioClient = minioClient;
+    public Minio( MinioConfig minioProperties) {
+        this.minioClient = MinioClient.builder().endpoint(minioProperties.getEndpoint())
+                .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+                .build();
         this.minioProperties = minioProperties;
     }
 

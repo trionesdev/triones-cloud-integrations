@@ -1,5 +1,9 @@
 package com.trionesdev.csi.tencentcloud.cos;
 
+import com.qcloud.cos.ClientConfig;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.region.Region;
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
 import com.trionesdev.csi.api.oss.request.*;
@@ -17,8 +21,10 @@ public class TencentCloudCos implements OssTemplate {
     private final COSClient cosClient;
     private final TencentCloudCosConfig tencentCloudCosProperties;
 
-    public TencentCloudCos(COSClient cosClient, TencentCloudCosConfig tencentCloudCosProperties) {
-        this.cosClient = cosClient;
+    public TencentCloudCos(TencentCloudCosConfig tencentCloudCosProperties) {
+        COSCredentials cred = new BasicCOSCredentials(tencentCloudCosProperties.getAccessKey(), tencentCloudCosProperties.getSecretKey());
+        ClientConfig clientConfig = new ClientConfig(new Region(tencentCloudCosProperties.getRegion()));
+        this.cosClient = new COSClient(cred, clientConfig);
         this.tencentCloudCosProperties = tencentCloudCosProperties;
     }
 

@@ -4,6 +4,7 @@ package com.trionesdev.csi.aliyun.sms;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
+import com.aliyun.teaopenapi.models.Config;
 import com.google.gson.Gson;
 import com.trionesdev.csi.api.sms.SmsException;
 import com.trionesdev.csi.api.sms.SmsTemplate;
@@ -23,8 +24,9 @@ public class AliYunSms implements SmsTemplate {
 
     private final Client client;
 
-    public AliYunSms(Client client, AliYunSmsConfig aliYunSmsProperties) {
-        this.client = client;
+    public AliYunSms(AliYunSmsConfig aliYunSmsProperties) throws Exception {
+        Config config = new Config().setAccessKeyId(aliYunSmsProperties.getAccessKeyId()).setAccessKeySecret(aliYunSmsProperties.getAccessKeySecret());
+        this.client = new Client(config);
         this.aliYunSmsProperties = aliYunSmsProperties;
     }
 

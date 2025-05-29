@@ -1,6 +1,7 @@
 package com.trionesdev.csi.tencentcloud.ocr;
 
 
+import com.tencentcloudapi.common.Credential;
 import com.trionesdev.csi.api.ocr.OcrException;
 import com.trionesdev.csi.api.ocr.OcrTemplate;
 import com.trionesdev.csi.api.ocr.request.OcrRequest;
@@ -16,8 +17,9 @@ public class TencentCloudOcr implements OcrTemplate {
 
     private final OcrClient ocrClient;
 
-    public TencentCloudOcr(OcrClient client){
-        this.ocrClient = client;
+    public TencentCloudOcr(TenantCloudOcrConfig config) {
+        Credential cred = new Credential(config.getSecretId(), config.getSecretKey());
+        this.ocrClient = new OcrClient(cred, config.getRegion());
     }
 
     @Override

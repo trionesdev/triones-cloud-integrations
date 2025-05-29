@@ -1,5 +1,6 @@
 package com.trionesdev.csi.qiniu.kodo;
 
+import com.qiniu.storage.Region;
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
 import com.trionesdev.csi.api.oss.request.*;
@@ -21,10 +22,11 @@ public class QiNiuKoDo implements OssTemplate {
     private final QiNiuKoDoConfig qiNiuKoDoProperties;
     private final UploadManager uploadManager;
 
-    public QiNiuKoDo(Auth auth, UploadManager uploadManager, QiNiuKoDoConfig qiNiuKoDoProperties) {
-        this.auth = auth;
+    public QiNiuKoDo( QiNiuKoDoConfig qiNiuKoDoProperties) {
+        this.auth = Auth.create(qiNiuKoDoProperties.getAccessKey(), qiNiuKoDoProperties.getSecretKey());
+        com.qiniu.storage.Configuration cfg = new com.qiniu.storage.Configuration(Region.autoRegion());
+        this.uploadManager = new UploadManager(cfg);
         this.qiNiuKoDoProperties = qiNiuKoDoProperties;
-        this.uploadManager = uploadManager;
     }
 
     @Override
