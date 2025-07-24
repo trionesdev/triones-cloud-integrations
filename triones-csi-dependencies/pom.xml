@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.trionesdev.csi</groupId>
     <artifactId>triones-csi-dependencies</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Triones:CSI:Dependencies</name>
 
     <properties>

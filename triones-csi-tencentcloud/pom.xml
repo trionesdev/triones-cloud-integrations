@@ -5,7 +5,7 @@
     <parent>
         <artifactId>triones-cloud-integrations</artifactId>
         <groupId>com.trionesdev.csi</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>Triones:CSI:TencentCloud:Parent</name>
