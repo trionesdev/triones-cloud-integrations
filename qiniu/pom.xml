@@ -7,22 +7,25 @@
         <groupId>com.trionesdev.csi</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <name>Triones:CSI:GoogleCloud:Parent</name>
-    <artifactId>triones-csi-googlecloud</artifactId>
 
+    <modelVersion>4.0.0</modelVersion>
+    <name>Triones:CSI:QiNiu:Parent</name>
+    <artifactId>qiniu</artifactId>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.trionesdev.csi</groupId>
-            <artifactId>triones-csi-googlecloud-storage</artifactId>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>triones-csi-qiniu-kodo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

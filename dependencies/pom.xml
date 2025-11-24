@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.trionesdev.csi</groupId>
-    <artifactId>triones-csi-dependencies</artifactId>
+    <artifactId>dependencies</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Triones:CSI:Dependencies</name>
 
@@ -70,7 +70,7 @@
             <!--            api-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
-                <artifactId>triones-csi-api</artifactId>
+                <artifactId>api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

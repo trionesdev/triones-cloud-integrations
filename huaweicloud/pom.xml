@@ -7,11 +7,10 @@
         <groupId>com.trionesdev.csi</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-
-    <name>Triones:CSI:SelfHosted:Parent</name>
-    <artifactId>triones-csi-selfhosted</artifactId>
-
+    <name>Triones:CSI:HuaweiCloud</name>
+    <artifactId>huaweicloud</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -19,5 +18,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.trionesdev.csi</groupId>
+            <artifactId>triones-csi-huaweicloud-obs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.trionesdev.csi</groupId>
+            <artifactId>triones-csi-huaweicloud-sms</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
