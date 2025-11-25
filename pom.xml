@@ -5,41 +5,41 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.trionesdev.csi</groupId>
-    <artifactId>triones-cloud-integrations</artifactId>
+    <artifactId>csi</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Triones:CloudIntegrations</name>
     <modules>
-        <module>api</module>
-        <module>api/api-base</module>
-        <module>api/api-oss</module>
-        <module>api/api-sms</module>
-        <module>api/api-ocr</module>
-        <module>api/api-ses</module>
-        <module>aliyun</module>
-        <module>aliyun/aliyun-oss</module>
-        <module>aliyun/aliyun-sms</module>
+        <module>csi-api</module>
+        <module>csi-api/csi-api-base</module>
+        <module>csi-api/csi-api-oss</module>
+        <module>csi-api/csi-api-sms</module>
+        <module>csi-api/csi-api-ocr</module>
+        <module>csi-api/csi-api-ses</module>
+        <module>csi-aliyun</module>
+        <module>csi-aliyun/csi-aliyun-oss</module>
+        <module>csi-aliyun/csi-aliyun-sms</module>
 
-        <module>tencentcloud</module>
-        <module>tencentcloud/tencentcloud-cos</module>
-        <module>tencentcloud/tencentcloud-sms</module>
-        <module>tencentcloud/tencentcloud-ses</module>
-        <module>tencentcloud/tencentcloud-ocr</module>
+        <module>csi-tencentcloud</module>
+        <module>csi-tencentcloud/csi-tencentcloud-cos</module>
+        <module>csi-tencentcloud/csi-tencentcloud-sms</module>
+        <module>csi-tencentcloud/csi-tencentcloud-ses</module>
+        <module>csi-tencentcloud/csi-tencentcloud-ocr</module>
 
-        <module>huaweicloud</module>
-        <module>huaweicloud/huaweicloud-obs</module>
-        <module>huaweicloud/huaweicloud-sms</module>
+        <module>csi-huaweicloud</module>
+        <module>csi-huaweicloud/csi-huaweicloud-obs</module>
+        <module>csi-huaweicloud/csi-huaweicloud-sms</module>
 
-        <module>qiniu</module>
-        <module>qiniu/qiniu-kodo</module>
-        <module>googlecloud</module>
-        <module>googlecloud/googlecloud-storage</module>
-        <module>selfhosted</module>
-        <module>selfhosted/minio</module>
-        <module>azure</module>
-        <module>azure/azure-blob</module>
+        <module>csi-qiniu</module>
+        <module>csi-qiniu/csi-qiniu-kodo</module>
+        <module>csi-googlecloud</module>
+        <module>csi-googlecloud/csi-googlecloud-storage</module>
+        <module>csi-selfhosted</module>
+        <module>csi-selfhosted/csi-minio</module>
+        <module>csi-azure</module>
+        <module>csi-azure/csi-azure-blob</module>
 
-        <module>dependencies</module>
+        <module>csi-dependencies</module>
 
     </modules>
 
@@ -53,7 +53,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
-                <artifactId>dependencies</artifactId>
+                <artifactId>csi-dependencies</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
