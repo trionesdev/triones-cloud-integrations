@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.trionesdev.csi</groupId>
+        <artifactId>csi</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>csi-tencentcloud-ses</artifactId>
+    <name>Triones:CSI:TencentCloud:Ses</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.trionesdev.csi</groupId>
+            <artifactId>csi-api-ses</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java-ses</artifactId>
+            <version>3.1.1060</version>
+        </dependency>
+    </dependencies>
+
+</project>
