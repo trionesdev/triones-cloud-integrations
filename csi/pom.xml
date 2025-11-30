@@ -19,28 +19,32 @@
         <module>csi-api-sms</module>
         <module>csi-api-ocr</module>
         <module>csi-api-ses</module>
+        <!--aliyun-->
         <module>csi-aliyun</module>
         <module>csi-aliyun-oss</module>
         <module>csi-aliyun-sms</module>
-
+        <!--tencentcloud-->
         <module>csi-tencentcloud</module>
         <module>csi-tencentcloud-cos</module>
         <module>csi-tencentcloud-sms</module>
         <module>csi-tencentcloud-ses</module>
         <module>csi-tencentcloud-ocr</module>
-
+        <!-- huaweicloud-->
         <module>csi-huaweicloud</module>
         <module>csi-huaweicloud-obs</module>
         <module>csi-huaweicloud-sms</module>
-
+        <!-- qiniu-->
         <module>csi-qiniu</module>
         <module>csi-qiniu-kodo</module>
+        <!-- googlecloud-->
         <module>csi-googlecloud</module>
         <module>csi-googlecloud-storage</module>
-        <module>csi-selfhosted</module>
-        <module>csi-minio</module>
+        <!-- azure-->
         <module>csi-azure</module>
         <module>csi-azure-blob</module>
+        <!-- selfhosted-->
+        <module>csi-selfhosted</module>
+        <module>csi-minio</module>
     </modules>
 
     <properties>
