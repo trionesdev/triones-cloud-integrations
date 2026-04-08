@@ -5,24 +5,24 @@
 ## 模块
 
 - 阿里云
-    - [OSS 对象存储](triones-csi-aliyun/triones-csi-aliyun-oss)
-    - [SMS 短信服务](triones-csi-aliyun/triones-csi-aliyun-sms)
+    - [OSS 对象存储](csi-pkg/csi-aliyun-oss)
+    - [SMS 短信服务](csi-pkg/csi-aliyun-sms)
 - 腾讯云
-    - [COS 对象存储](triones-csi-tencentcloud/triones-csi-tencentcloud-cos)
-    - [SMS 短信服务](triones-csi-tencentcloud/triones-csi-tencentcloud-sms)
-    - [SES 邮件服务](triones-csi-tencentcloud/triones-csi-tencentcloud-ses)
-    - [OCR 文本识别](triones-csi-tencentcloud/triones-csi-tencentcloud-ocr)
+    - [COS 对象存储](csi-pkg/csi-tencentcloud-cos)
+    - [SMS 短信服务](csi-pkg/csi-tencentcloud-sms)
+    - [SES 邮件服务](csi-pkg/csi-tencentcloud-ses)
+    - [OCR 文本识别](csi-pkg/csi-tencentcloud-ocr)
 - 华为云
-    - [OBS 对象存储](triones-csi-huaweicloud/triones-csi-huaweicloud-obs)
-    - [SMS 短信服务](triones-csi-huaweicloud/triones-csi-huaweicloud-sms)
+    - [OBS 对象存储](csi-pkg/csi-huaweicloud-obs)
+    - [SMS 短信服务](csi-pkg/csi-huaweicloud-sms)
 - 七牛云
-    - [KODO 对象存储](triones-csi-qiniu/triones-csi-qiniu-kodo)
+    - [KODO 对象存储](csi-pkg/csi-qiniu-kodo)
 - 微软云
-    - [BLOB 块存储](triones-csi-azure/triones-csi-azure-blob)
+    - [BLOB 块存储](csi-pkg/csi-azure-blob)
 - 谷歌云
-    - [STORAGE 存储](triones-csi-googlecloud/triones-csi-googlecloud-storage)
+    - [STORAGE 存储](csi-pkg/csi-googlecloud-storage)
 - 自部署服务
-    - [minio](triones-csi-selfhosted/triones-csi-minio)
+    - [minio](csi-pkg/csi-minio)
 
 
 ## 使用

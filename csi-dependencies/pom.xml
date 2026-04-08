@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.trionesdev.csi</groupId>
-        <artifactId>triones-csi</artifactId>
+        <artifactId>csi</artifactId>
         <version>0.0.2-SNAPSHOT</version>
     </parent>
     <artifactId>csi-dependencies</artifactId>
@@ -26,29 +26,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.7.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-bom</artifactId>
-                <version>5.8.18</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>2.0.6</version>
-            </dependency>
+
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -69,8 +48,71 @@
                 <artifactId>okhttp</artifactId>
                 <version>4.10.0</version>
             </dependency>
-
-            <!--            api-->
+            <!--            tencentcloud-->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java-ses</artifactId>
+                <version>3.1.1060</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>3.1.1089</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.squareup.okhttp3</groupId>
+                        <artifactId>okhttp</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.squareup.okio</groupId>
+                        <artifactId>okio</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.tencentcloudapi</groupId>
+                        <artifactId>tencentcloud-sdk-java-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java-common</artifactId>
+                <version>3.1.737</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.squareup.okhttp</groupId>
+                        <artifactId>okhttp</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.google.code.gson</groupId>
+                        <artifactId>gson</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>5.6.187</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.tencentcloudapi</groupId>
+                        <artifactId>tencentcloud-sdk-java-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--            tencentcloud-->
+            <!--         csi   api-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-api</artifactId>
@@ -101,9 +143,9 @@
                 <artifactId>csi-api-ocr</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--            api-->
+            <!--       csi     api-->
 
-            <!--            aliyun-->
+            <!--          csi  aliyun-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-aliyun</artifactId>
@@ -136,9 +178,9 @@
                 <artifactId>csi-huaweicloud-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--huaweicloud-->
+            <!--csi huaweicloud-->
 
-            <!--            tencentcloud-->
+            <!--   csi         tencentcloud-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-tencentcloud</artifactId>
@@ -164,8 +206,8 @@
                 <artifactId>csi-tencentcloud-ocr</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--            tencentcloud-->
-            <!--            qiniu-->
+            <!--      csi      tencentcloud-->
+            <!--         csi   qiniu-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-qiniu</artifactId>
@@ -176,8 +218,8 @@
                 <artifactId>csi-qiniu-kodo</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--            qiniu-->
-            <!--            googldcloud-->
+            <!--         csi   qiniu-->
+            <!--         csi   googldcloud-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-googlecloud</artifactId>
@@ -188,9 +230,9 @@
                 <artifactId>csi-googlecloud-storage</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--            googldcloud-->
+            <!--         csi       googldcloud-->
 
-            <!--            azure-->
+            <!--         csi   azure-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-azure</artifactId>
@@ -201,9 +243,9 @@
                 <artifactId>csi-azure-blob</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!--            azure-->
+            <!--         csi       azure-->
 
-            <!--            self-hosted-->
+            <!--          csi  self-hosted-->
             <dependency>
                 <groupId>com.trionesdev.csi</groupId>
                 <artifactId>csi-selfhosted</artifactId>
