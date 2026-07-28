@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.trionesdev.csi</groupId>
         <artifactId>csi-pkg</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <name>Triones:CSI:GoogleCloud:Storage</name>
     <artifactId>csi-googlecloud-storage</artifactId>

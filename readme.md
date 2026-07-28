@@ -23,6 +23,7 @@
     - [STORAGE 存储](csi-pkg/csi-googlecloud-storage)
 - 自部署服务
     - [minio](csi-pkg/csi-minio)
+    - [rustfs](csi-pkg/csi-rustfs)
 
 
 ## 使用
