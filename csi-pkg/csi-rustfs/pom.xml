@@ -8,8 +8,8 @@
         <artifactId>csi-pkg</artifactId>
         <version>0.0.2-SNAPSHOT</version>
     </parent>
-    <name>Triones:CSI:SelfHosted:Minio</name>
-    <artifactId>csi-minio</artifactId>
+    <name>Triones:CSI:SelfHosted:RustFS</name>
+    <artifactId>csi-rustfs</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -19,24 +19,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.trionesdev.csi</groupId>
             <artifactId>csi-api-oss</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>8.6.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.squareup.okhttp3</groupId>
-                    <artifactId>okhttp</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>2.25.27</version>
         </dependency>
     </dependencies>
 </project>

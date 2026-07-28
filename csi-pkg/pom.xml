@@ -45,6 +45,7 @@
         <!-- selfhosted-->
         <module>csi-selfhosted</module>
         <module>csi-minio</module>
+        <module>csi-rustfs</module>
     </modules>
 
     <properties>
