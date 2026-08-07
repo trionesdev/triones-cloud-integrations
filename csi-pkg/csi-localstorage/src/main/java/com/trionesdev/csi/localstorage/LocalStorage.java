@@ -202,10 +202,16 @@ public class LocalStorage implements OssTemplate {
     }
 
     private Path objectPath(String bucketName, String objectName) {
+        if (StringUtils.isBlank(bucketName)) {
+            return Paths.get(config.getDir(), objectName);
+        }
         return Paths.get(config.getDir(), bucketName, objectName);
     }
 
     private Path bucketPath(String bucketName) {
+        if (StringUtils.isBlank(bucketName)) {
+            return Paths.get(config.getDir());
+        }
         return Paths.get(config.getDir(), bucketName);
     }
 
