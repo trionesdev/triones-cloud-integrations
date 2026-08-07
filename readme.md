@@ -24,6 +24,7 @@
 - 自部署服务
     - [minio](csi-pkg/csi-minio)
     - [rustfs](csi-pkg/csi-rustfs)
+    - [localstorage 本地磁盘存储](csi-pkg/csi-localstorage)
 
 
 ## 使用
