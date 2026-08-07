@@ -261,6 +261,11 @@
                 <artifactId>csi-rustfs</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.trionesdev.csi</groupId>
+                <artifactId>csi-localstorage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--            self-hosted-->
 
         </dependencies>

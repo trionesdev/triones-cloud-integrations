@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.InputStream;
 import java.time.chrono.ChronoZonedDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,8 +44,15 @@ public class Minio implements OssTemplate {
                 .object(request.getObjectName())
                 .build();
         try {
-            InputStream inputStream = minioClient.getObject(getObjectArgs);
-            return OssGetObjectResponse.builder().in(inputStream).build();
+            GetObjectResponse response = minioClient.getObject(getObjectArgs);
+            String contentType = response.headers().get("Content-Type");
+            String contentLengthHeader = response.headers().get("Content-Length");
+            long contentLength = StringUtils.isNotBlank(contentLengthHeader) ? Long.parseLong(contentLengthHeader) : 0L;
+            return OssGetObjectResponse.builder()
+                    .in(response)
+                    .contentType(contentType)
+                    .contentLength(contentLength)
+                    .build();
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
             throw new OssException(ex);

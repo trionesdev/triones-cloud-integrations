@@ -11,7 +11,7 @@
 
     <artifactId>csi-pkg</artifactId>
     <packaging>pom</packaging>
-    <name>Triones:CloudIntegrations</name>
+    <name>Triones:CloudIntegrations:Pkg</name>
     <modules>
         <module>csi-api</module>
         <module>csi-api-base</module>
@@ -46,6 +46,7 @@
         <module>csi-selfhosted</module>
         <module>csi-minio</module>
         <module>csi-rustfs</module>
+        <module>csi-localstorage</module>
     </modules>
 
     <properties>

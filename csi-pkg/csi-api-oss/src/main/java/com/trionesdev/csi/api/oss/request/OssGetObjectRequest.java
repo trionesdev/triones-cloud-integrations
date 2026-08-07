@@ -14,5 +14,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OssGetObjectRequest extends BucketInfo {
+    private String version;
     private String objectName;
 }

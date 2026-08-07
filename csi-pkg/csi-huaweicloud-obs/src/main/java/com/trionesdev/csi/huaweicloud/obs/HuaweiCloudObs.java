@@ -1,5 +1,6 @@
 package com.trionesdev.csi.huaweicloud.obs;
 
+import com.obs.services.model.ObsObject;
 import com.trionesdev.csi.api.oss.OssTemplate;
 import com.trionesdev.csi.api.oss.request.*;
 import com.trionesdev.csi.api.oss.response.OssGetObjectResponse;
@@ -23,7 +24,13 @@ public class HuaweiCloudObs implements OssTemplate {
 
     @Override
     public OssGetObjectResponse getObject(OssGetObjectRequest request) {
-        return null;
+        String bucketName = bucketName(request.getBucketName());
+        ObsObject object = obsClient.getObject(bucketName, request.getObjectName(), request.getVersion());
+        return OssGetObjectResponse.builder()
+                .in(object.getObjectContent())
+                .contentType(object.getMetadata().getContentType())
+                .contentLength(object.getMetadata().getContentLength())
+                .build();
     }
 
     @Override

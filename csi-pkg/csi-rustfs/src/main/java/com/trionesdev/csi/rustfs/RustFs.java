@@ -12,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -49,8 +50,12 @@ public class RustFs implements OssTemplate {
                 .key(request.getObjectName())
                 .build();
         try {
+            ResponseInputStream<GetObjectResponse> stream = s3Client.getObject(getObjectRequest);
+            GetObjectResponse response = stream.response();
             return OssGetObjectResponse.builder()
-                    .in(s3Client.getObject(getObjectRequest))
+                    .in(stream)
+                    .contentType(response.contentType())
+                    .contentLength(response.contentLength())
                     .build();
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);

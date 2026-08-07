@@ -13,4 +13,6 @@ import java.io.InputStream;
 @NoArgsConstructor
 public class OssGetObjectResponse {
     private InputStream in;
+    private String contentType;
+    private long contentLength;
 }

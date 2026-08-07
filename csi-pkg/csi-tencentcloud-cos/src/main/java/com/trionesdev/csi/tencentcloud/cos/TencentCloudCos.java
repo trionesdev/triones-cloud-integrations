@@ -1,8 +1,13 @@
 package com.trionesdev.csi.tencentcloud.cos;
 
+import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.model.COSObject;
+import com.qcloud.cos.model.GetObjectRequest;
+import com.qcloud.cos.model.ObjectMetadata;
+import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.region.Region;
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
@@ -11,9 +16,6 @@ import com.trionesdev.csi.api.oss.response.OssGetObjectResponse;
 import com.trionesdev.csi.api.oss.response.OssListObjectsResponse;
 import com.trionesdev.csi.api.oss.response.OssPutObjectResponse;
 import com.trionesdev.csi.api.oss.util.OssUtils;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PutObjectRequest;
 import org.apache.commons.lang3.StringUtils;
 
 public class TencentCloudCos implements OssTemplate {
@@ -31,7 +33,16 @@ public class TencentCloudCos implements OssTemplate {
 
     @Override
     public OssGetObjectResponse getObject(OssGetObjectRequest request) {
-        return null;
+
+        String bucketName = bucketName(request.getBucketName());
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, request.getObjectName(), request.getVersion());
+        COSObject cosObject = cosClient.getObject(getObjectRequest);
+
+        return OssGetObjectResponse.builder()
+                .in(cosObject.getObjectContent())
+                .contentType(cosObject.getObjectMetadata().getContentType())
+                .contentLength(cosObject.getObjectMetadata().getContentLength())
+                .build();
     }
 
     @Override

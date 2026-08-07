@@ -2,10 +2,7 @@ package com.trionesdev.csi.aliyun.oss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.model.GenericRequest;
-import com.aliyun.oss.model.ListObjectsV2Request;
-import com.aliyun.oss.model.ListObjectsV2Result;
-import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.*;
 import com.trionesdev.csi.api.oss.OssException;
 import com.trionesdev.csi.api.oss.OssTemplate;
 import com.trionesdev.csi.api.oss.request.*;
@@ -33,7 +30,13 @@ public class AliYunOSS implements OssTemplate {
 
     @Override
     public OssGetObjectResponse getObject(OssGetObjectRequest request) {
-        return null;
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName(request.getBucketName()), request.getObjectName());
+        OSSObject ossObject = oss.getObject(getObjectRequest);
+        return OssGetObjectResponse.builder()
+                .in(ossObject.getObjectContent())
+                .contentType(ossObject.getObjectMetadata().getContentType())
+                .contentLength(ossObject.getObjectMetadata().getContentLength())
+                .build();
     }
 
     @Override
@@ -42,7 +45,8 @@ public class AliYunOSS implements OssTemplate {
         String urlPrefix = urlPrefix(request.getUrlPrefix());
         try {
             PutObjectResult result = oss.putObject(bucketName, request.getObjectName(), request.getInputStream());
-            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix)).build();
+            return OssPutObjectResponse.builder().url(OssUtils.joinPrefix(request.getObjectName(), urlPrefix))
+                    .build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new OssException(e);
